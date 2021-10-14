@@ -2,6 +2,7 @@ package main.projectneighbourgraph;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 
 public class MainController {
     @FXML
@@ -12,3 +13,4 @@ public class MainController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 }
+
