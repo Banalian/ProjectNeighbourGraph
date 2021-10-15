@@ -89,7 +89,7 @@
                                             <items>
                                                 <AnchorPane>
                                                     <children>
-                                                        <Canvas height="303.0" visible="false" width="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
+                                                        <Canvas fx:id="mainCanvas" height="303.0" onMouseClicked="#addPoint" width="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
                                                     </children>
                                                 </AnchorPane>
                                                 <AnchorPane>
