@@ -12,6 +12,8 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("IHM_graphes_2D_v2.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        MainController mainController = fxmlLoader.getController();
+        mainController.startCanvasController();
         //stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

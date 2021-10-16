@@ -16,13 +16,20 @@ public class MainController {
     @FXML
     private Canvas mainCanvas;
 
-    private ArrayList<Node> nodeArrayList;
-    private int pointCounter;
+    CanvasController canvasController;
 
 
     public MainController(){
-        nodeArrayList = new ArrayList<Node>();
-        pointCounter = 0;
+
+    }
+
+    public void startCanvasController(){
+        canvasController = new CanvasController(mainCanvas);
+    }
+
+    @FXML
+    private void addPoint(MouseEvent event){
+        canvasController.addNewPoint(event);
     }
 
     @FXML
@@ -30,35 +37,6 @@ public class MainController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
-    @FXML
-    private void addPoint(MouseEvent event){
-        //System.out.println("you pressed !");
-        GraphicsContext gc = mainCanvas.getGraphicsContext2D();
-        double xClicked = event.getX();
-        double yClicked = event.getY();
-        drawX(xClicked, yClicked,5, gc);
-        nodeArrayList.add(new Node(xClicked, yClicked, pointCounter++));
-        System.out.println("New node array :\n"+nodeArrayList);
-    }
 
-
-    private void drawX(double centerX, double centerY, double size, GraphicsContext gc){
-        gc.strokeLine(
-                centerX-size,
-                centerY-size,
-                centerX+size,
-                centerY+size);
-        gc.strokeLine(
-                centerX-size,
-                centerY+size,
-                centerX+size,
-                centerY-size);
-
-        gc.strokeOval(
-                centerX-size-size*0.5,
-                centerY-size-size*0.5,
-                size*3,
-                size*3);
-    }
 }
 
