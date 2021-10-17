@@ -23,8 +23,9 @@ public class MainController {
 
     }
 
-    public void startCanvasController(){
+    public CanvasController startCanvasController(){
         canvasController = new CanvasController(mainCanvas);
+        return canvasController;
     }
 
     @FXML
