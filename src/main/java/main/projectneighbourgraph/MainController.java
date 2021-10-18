@@ -28,6 +28,10 @@ public class MainController {
         return canvasController;
     }
 
+    /**
+     * Activated with OnMouseClick on the canvas
+     * @param event the MouseEvent to use
+     */
     @FXML
     private void addPoint(MouseEvent event){
         canvasController.addNewPoint(event);

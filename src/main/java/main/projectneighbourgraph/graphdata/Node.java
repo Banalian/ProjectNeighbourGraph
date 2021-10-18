@@ -1,5 +1,8 @@
 package main.projectneighbourgraph.graphdata;
 
+/**
+ * Data class for a node, containing its canvas position and relative position for our range
+ */
 public class Node {
     private double xPos;
     private double yPos;
@@ -59,6 +62,8 @@ public class Node {
         return "Node{" +
                 "xPos=" + xPos +
                 ", yPos=" + yPos +
+                ", unitxPos=" + unitxPos +
+                ", unityPos=" + unityPos +
                 ", id=" + id +
                 '}';
     }

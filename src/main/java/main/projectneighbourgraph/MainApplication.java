@@ -17,11 +17,11 @@ public class MainApplication extends Application {
         CanvasController canvasController = mainController.startCanvasController();
         canvasController.createFrame();
 
+        /// adds 2 listeners to do the resize action if necessary, since canvas don't have any resize properties by default.
         stage.widthProperty().addListener((ov, oldValue, newValue) -> {
             canvasController.setCanvasWidth(newValue.doubleValue()*0.70);
             canvasController.reDraw();
         });
-
         stage.heightProperty().addListener((ov, oldValue, newValue) -> {
             canvasController.setCanvasHeight(newValue.doubleValue()*0.70);
             canvasController.reDraw();
