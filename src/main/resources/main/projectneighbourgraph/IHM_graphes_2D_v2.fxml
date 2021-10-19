@@ -94,14 +94,19 @@
                                                 </AnchorPane>
                                                 <AnchorPane>
                                                     <children>
-                                                        <ButtonBar prefHeight="17.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <ButtonBar fx:id="graphButtonBar" prefHeight="30.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="False">
                                                             <buttons>
-                                                                <MenuButton contentDisplay="TOP" mnemonicParsing="false" popupSide="TOP" text="Algorithm" textAlignment="CENTER">
+                                                                <MenuButton contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="TOP" prefHeight="25.0" prefWidth="90.0" text="Algorithm" textAlignment="CENTER">
                                                                     <items>
-                                                                        <MenuItem mnemonicParsing="false" text="Action 1" />
                                                                         <MenuItem mnemonicParsing="false" text="Action 2" />
                                                                     </items>
                                                                 </MenuButton>
+                                                <MenuButton mnemonicParsing="false" text="Distance">
+                                                  <items>
+                                                    <MenuItem mnemonicParsing="false" text="Action 1" />
+                                                    <MenuItem mnemonicParsing="false" text="Action 2" />
+                                                  </items>
+                                                </MenuButton>
                                                             </buttons>
                                                         </ButtonBar>
                                                     </children>
@@ -114,7 +119,15 @@
                         </Tab>
                         <Tab fx:id="statTab" text="Stats">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView layoutX="171.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
+                           </children></AnchorPane>
                             </content>
                         </Tab>
                     </tabs>
