@@ -48,9 +48,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.projectneighbourgraph.MainController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.projectneighbourgraph.CanvasController">
     <children>
-        <MenuBar VBox.vgrow="NEVER">
+        <MenuBar prefHeight="0.0" prefWidth="589.0" VBox.vgrow="NEVER">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
@@ -106,16 +106,16 @@
                                                 </AnchorPane>
                                                 <AnchorPane>
                                                     <children>
-                                                        <ButtonBar fx:id="graphButtonBar" maxHeight="30.0" maxWidth="640.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="False">
+                                                        <ButtonBar fx:id="graphButtonBar" layoutX="9.0" layoutY="9.0" maxHeight="81.0" maxWidth="640.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="26.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="False">
                                                             <buttons>
-                                                <Button mnemonicParsing="false" text="Refresh" />
-                                                <MenuButton mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Distance">
+                                                <Button fx:id="refreshButton" mnemonicParsing="false" text="Refresh" />
+                                                <MenuButton fx:id="distanceSelectButton" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" popupSide="TOP" text="Distance">
                                                   <items>
                                                     <MenuItem mnemonicParsing="false" text="Euclidian" />
                                                     <MenuItem mnemonicParsing="false" text="Sinus" />
                                                   </items>
                                                 </MenuButton>
-                                                                <MenuButton contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" popupSide="TOP" prefHeight="25.0" prefWidth="90.0" text="Algorithm" textAlignment="CENTER">
+                                                                <MenuButton fx:id="algorithmSelectButton" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" popupSide="TOP" prefHeight="25.0" prefWidth="90.0" text="Algorithm" textAlignment="CENTER">
                                                                     <items>
                                                                         <MenuItem mnemonicParsing="false" text="kNN" />
                                                       <MenuItem mnemonicParsing="false" text="ε-graph" />
@@ -139,10 +139,10 @@
                            <children>
                               <TableView layoutX="171.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="Point Name" />
-                                  <TableColumn prefWidth="75.0" text="X Coordinates" />
-                                    <TableColumn prefWidth="75.0" text="Y Coordinates" />
-                                    <TableColumn prefWidth="75.0" text="Linked to" />
+                                  <TableColumn fx:id="pointNameColumn" prefWidth="75.0" text="Point Name" />
+                                  <TableColumn prefWidth="75.0" text="X Coordinates" fx:id="xCoordColumn" />
+                                    <TableColumn fx:id="yCoordColumn" prefWidth="75.0" text="Y Coordinates" />
+                                    <TableColumn fx:id="linkedToColumn" prefWidth="75.0" text="Linked to" />
                                 </columns>
                               </TableView>
                            </children></AnchorPane>
