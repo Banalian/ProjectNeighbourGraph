@@ -32,7 +32,6 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -89,7 +88,7 @@
                                             <items>
                                                 <AnchorPane>
                                                     <children>
-                                                        <fx:include fx:id="canvas" source="canvas.fxml" />
+                                                        <fx:include fx:id="canvas" source="canvas.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                     </children>
                                                 </AnchorPane>
                                                 <AnchorPane>
