@@ -14,10 +14,8 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("IHM_graphes_2D_v2.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         MainController mainController = fxmlLoader.getController();
-        CanvasController canvasController = mainController.startCanvasController();
-        canvasController.createFrame();
 
-        /// adds 2 listeners to do the resize action if necessary, since canvas don't have any resize properties by default.
+        /*/// adds 2 listeners to do the resize action if necessary, since canvas don't have any resize properties by default.
         stage.widthProperty().addListener((ov, oldValue, newValue) -> {
             canvasController.setCanvasWidth(newValue.doubleValue()*0.70);
             canvasController.reDraw();
@@ -25,7 +23,7 @@ public class MainApplication extends Application {
         stage.heightProperty().addListener((ov, oldValue, newValue) -> {
             canvasController.setCanvasHeight(newValue.doubleValue()*0.70);
             canvasController.reDraw();
-        });
+        });*/
 
 
         //stage.setTitle("Hello!");

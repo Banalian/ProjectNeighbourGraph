@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class CanvasController {
 
 
-    private Canvas canvas;
+    @FXML private Canvas canvas;
 
     private ArrayList<Node> nodeArrayList;
     private int pointCounter;
@@ -23,8 +23,7 @@ public class CanvasController {
     private int frameMargin;
 
 
-    public CanvasController(Canvas newCanvas){
-        this.canvas = newCanvas;
+    public CanvasController(){
         nodeArrayList = new ArrayList<Node>();
         pointCounter = 0;
         size = 2;
@@ -35,7 +34,7 @@ public class CanvasController {
     /**
      * Creates the frame with the class margin and canvas size
      */
-    public void createFrame(){
+    private void createFrame(){
         GraphicsContext gc = canvas.getGraphicsContext2D();
         double canvasHeight = canvas.getHeight();
         double canvasWidth = canvas.getWidth();
@@ -72,6 +71,7 @@ public class CanvasController {
      * will check if the position is valid, before adding the data and drawing the point
      * @param event the MouseEvent to use
      */
+    @FXML
     public void addNewPoint(MouseEvent event){
         //System.out.println("you pressed !");
         GraphicsContext gc = canvas.getGraphicsContext2D();
