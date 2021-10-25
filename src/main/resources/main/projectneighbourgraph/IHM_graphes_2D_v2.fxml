@@ -89,7 +89,7 @@
                                             <items>
                                                 <AnchorPane>
                                                     <children>
-                                                        <fx:include fx:id="canvasView" source="canvas.fxml" />
+                                                        <fx:include fx:id="canvas" source="canvas.fxml" />
                                                     </children>
                                                 </AnchorPane>
                                                 <AnchorPane>

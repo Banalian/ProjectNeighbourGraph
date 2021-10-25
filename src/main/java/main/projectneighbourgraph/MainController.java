@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import main.projectneighbourgraph.graphdata.Node;
 
 import java.util.ArrayList;
@@ -21,6 +22,10 @@ public class MainController {
 
     public MainController(){
 
+    }
+
+    public CanvasController getCanvasController() {
+        return canvasController;
     }
 }
 
