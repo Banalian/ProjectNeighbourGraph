@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import main.projectneighbourgraph.graphdata.Node;
+import main.projectneighbourgraph.strategy.LinkStrategy;
 
 import java.util.ArrayList;
 
@@ -16,8 +17,6 @@ public class MainController {
     @FXML private Label welcomeText;
 
     @FXML private Button refreshButton;
-    //@FXML private MenuButton distanceSelectButton;
-    //@FXML private MenuButton algorithmSelectButton;
     @FXML private CanvasController canvasController;
 
 
@@ -29,6 +28,15 @@ public class MainController {
 
     public MainController(){
 
+    }
+
+    private LinkStrategy strategy;
+
+    void setStrategy(LinkStrategy strategy) {
+        this.strategy = strategy;
+    }
+    void executeStrategy(ArrayList nodeList, int arg){
+        strategy.link(nodeList, arg);
     }
 
     public void testTabView(){
