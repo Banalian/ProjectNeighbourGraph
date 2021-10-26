@@ -30,6 +30,9 @@ public class MainApplication extends Application {
         stage.setTitle("Neighbor Graph");
         stage.setScene(scene);
         stage.show();
+
+        stage.setMinHeight(400);
+        stage.setMinWidth(350);
     }
 
     public static void main(String[] args) {
