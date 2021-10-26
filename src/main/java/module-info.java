@@ -7,4 +7,6 @@ module main.projectneighbourgraph {
     exports main.projectneighbourgraph;
     exports main.projectneighbourgraph.strategy;
     opens main.projectneighbourgraph.strategy to javafx.fxml;
+
+    opens main.projectneighbourgraph.graphdata to javafx.base;
 }

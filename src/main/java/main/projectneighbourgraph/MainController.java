@@ -4,9 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import main.projectneighbourgraph.graphdata.Node;
@@ -21,8 +20,23 @@ public class MainController {
     //@FXML private MenuButton algorithmSelectButton;
     @FXML private CanvasController canvasController;
 
+
+    @FXML private TableView<Node> tableView;
+    @FXML private TableColumn<Node, String> pointNameColumn;
+    @FXML private TableColumn<Node, Double> xCoordColumn;
+    @FXML private TableColumn<Node, Double> yCoordColumn;
+    @FXML private TableColumn<Node, String> linkedToColumn;
+
     public MainController(){
 
+    }
+
+    public void testTabView(){
+        pointNameColumn.setCellValueFactory(new PropertyValueFactory<Node, String>("id"));
+        xCoordColumn.setCellValueFactory(new PropertyValueFactory<Node, Double>("unitxPos"));
+        yCoordColumn.setCellValueFactory(new PropertyValueFactory<Node, Double>("unityPos"));
+        //linkedToColumn.setCellValueFactory(new PropertyValueFactory<Node, String>("id"));
+        tableView.getItems().add(new Node(250,250,0.5,0.5,1));
     }
 
     public CanvasController getCanvasController() {

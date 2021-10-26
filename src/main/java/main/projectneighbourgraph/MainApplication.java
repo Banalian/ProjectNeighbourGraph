@@ -26,6 +26,7 @@ public class MainApplication extends Application {
             canvasController.reDraw();
         });
 
+        mainController.testTabView();
 
         stage.setTitle("Neighbor Graph");
         stage.setScene(scene);
