@@ -95,19 +95,19 @@
                                                     <children>
                                                         <ButtonBar layoutX="9.0" layoutY="9.0" maxHeight="81.0" maxWidth="640.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="26.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="False">
                                                             <buttons>
-                                                <Button fx:id="refreshButton" mnemonicParsing="false" text="Refresh" />
-                                                <MenuButton fx:id="distanceSelectButton" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" popupSide="TOP" text="Distance">
+                                                <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+                                                <MenuButton mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" popupSide="TOP" text="Distance">
                                                   <items>
-                                                    <MenuItem mnemonicParsing="false" text="Euclidian" />
-                                                    <MenuItem mnemonicParsing="false" text="Sinus" />
+                                                    <MenuItem fx:id="euclidianSelection" mnemonicParsing="false" onAction="#euclidianDistance" text="Euclidian" />
+                                                    <MenuItem fx:id="sineSelection" mnemonicParsing="false" onAction="#sineDistance" text="Sinus" />
                                                   </items>
                                                 </MenuButton>
-                                                                <MenuButton fx:id="algorithmSelectButton" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" popupSide="TOP" prefHeight="25.0" prefWidth="90.0" text="Algorithm" textAlignment="CENTER">
+                                                                <MenuButton contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" popupSide="TOP" prefHeight="25.0" prefWidth="90.0" text="Algorithm" textAlignment="CENTER">
                                                                     <items>
-                                                                        <MenuItem mnemonicParsing="false" text="kNN" />
-                                                      <MenuItem mnemonicParsing="false" text="ε-graph" />
-                                                      <MenuItem mnemonicParsing="false" text="GG Gabriel" />
-                                                      <MenuItem mnemonicParsing="false" text="Relative Neighbors" />
+                                                                        <MenuItem fx:id="kNNSelection" mnemonicParsing="false" onAction="#kNNLink" text="kNN" />
+                                                      <MenuItem fx:id="egraphSelection" mnemonicParsing="false" onAction="#egraphLink" text="ε-graph" />
+                                                      <MenuItem fx:id="ggSelection" mnemonicParsing="false" onAction="#ggLink" text="GG Gabriel" />
+                                                      <MenuItem fx:id="relativeSelection" mnemonicParsing="false" onAction="#relativeLink" text="Relative Neighbors" />
                                                                     </items>
                                                                 </MenuButton>
                                                             </buttons>
