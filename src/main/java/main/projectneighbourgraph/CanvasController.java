@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
+import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Node;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class CanvasController {
     @FXML private Canvas canvas;
 
     private ArrayList<Node> nodeArrayList;
+    private ArrayList<Edge> edgeArrayList;
+
     private int pointCounter;
     private int size;
     private int frameMargin;
@@ -25,6 +28,8 @@ public class CanvasController {
 
     public CanvasController(){
         nodeArrayList = new ArrayList<Node>();
+        edgeArrayList = new ArrayList<Edge>();
+
         pointCounter = 0;
         size = 2;
         frameMargin = 10;
@@ -64,6 +69,10 @@ public class CanvasController {
             node.setyPos(yToDraw);
             drawX(xToDraw, yToDraw, size, gc);
         }
+
+        for(Edge edge : edgeArrayList){
+            drawEdge(edge, gc);
+        }
     }
 
     /**
@@ -84,6 +93,17 @@ public class CanvasController {
             drawX(xClicked, yClicked,size, gc);
             nodeArrayList.add(new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++));
             System.out.println("New node array :\n"+nodeArrayList);
+
+            //to comment/remove when not needed anymore
+            if(pointCounter%2 == 0){
+                System.out.println("test draw of Edge");
+                int nbNode = nodeArrayList.size();
+                Edge newEdge = new Edge(nodeArrayList.get(nbNode-2), nodeArrayList.get(nbNode-1));
+                edgeArrayList.add(newEdge);
+                drawEdge(newEdge, gc);
+            }
+
+
         }else{
             System.out.println("Position not in frame");
         }
@@ -130,6 +150,32 @@ public class CanvasController {
                 centerY-size-size*0.5,
                 size*3,
                 size*3);
+    }
+
+    /**
+     * Draw the edge between two points, using an Edge. Will be expanded to work with classes later on
+     * @param edge the edge to draw
+     * @param gc the GraphicsContext to draw on
+     */
+    public void drawEdge(Edge edge, GraphicsContext gc){
+        drawLineBetweenTwoPoint(edge.getNode1(), edge.getNode2(), gc);
+    }
+
+    /**
+     * Draw a line between the two points, using their canvas position.
+     * Will store the line in an array
+     *
+     * @param point1 the first node
+     * @param point2 the second node
+     * @param gc the GraphicsContext to draw on
+     */
+    public void drawLineBetweenTwoPoint(Node point1, Node point2, GraphicsContext gc){
+        gc.strokeLine(
+                point1.getxPos(),
+                point1.getyPos(),
+                point2.getxPos(),
+                point2.getyPos()
+        );
     }
 
     /**
