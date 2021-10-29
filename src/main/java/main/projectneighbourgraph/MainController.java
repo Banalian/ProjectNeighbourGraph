@@ -13,6 +13,8 @@ import main.projectneighbourgraph.strategy.LinkStrategy;
 
 import java.util.ArrayList;
 
+//controlleur principale du logiciel
+
 public class MainController {
     @FXML private Label welcomeText;
 
