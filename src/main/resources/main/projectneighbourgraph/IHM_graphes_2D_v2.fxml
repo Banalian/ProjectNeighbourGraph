@@ -110,6 +110,8 @@
                                                       <MenuItem fx:id="relativeSelection" mnemonicParsing="false" onAction="#relativeLink" text="Relative Neighbors" />
                                                                     </items>
                                                                 </MenuButton>
+                                                <ColorPicker minWidth="37.0" prefHeight="25.0" />
+                                                <ProgressIndicator progress="0.0" />
                                                             </buttons>
                                                         </ButtonBar>
                                                     </children>
@@ -123,16 +125,8 @@
                         <Tab fx:id="statTab" text="Stats">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TableView fx:id="tableView" layoutX="171.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columns>
-                                  <TableColumn fx:id="pointNameColumn" prefWidth="75.0" text="Point Name" />
-                                  <TableColumn prefWidth="75.0" text="X Coordinates" fx:id="xCoordColumn" />
-                                    <TableColumn fx:id="yCoordColumn" prefWidth="75.0" text="Y Coordinates" />
-                                    <TableColumn fx:id="linkedToColumn" prefWidth="75.0" text="Linked to" />
-                                </columns>
-                              </TableView>
-                           </children></AnchorPane>
+                                    <fx:include fx:id="tableView" source="StatsTable.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                </AnchorPane>
                             </content>
                         </Tab>
                     </tabs>

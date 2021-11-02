@@ -16,6 +16,8 @@ public class MainApplication extends Application {
         MainController mainController = fxmlLoader.getController();
 
         CanvasController canvasController = mainController.getCanvasController();
+        TableController tableController = mainController.getTableController();
+
         /// adds 2 listeners to do the resize action if necessary, since canvas don't have any resize properties by default.
         stage.widthProperty().addListener((ov, oldValue, newValue) -> {
             canvasController.setCanvasWidth(newValue.doubleValue()*0.70);
@@ -26,7 +28,7 @@ public class MainApplication extends Application {
             canvasController.reDraw();
         });
 
-        mainController.testTabView();
+        tableController.testTabView();
 
         stage.setTitle("Neighbor Graph");
         stage.setScene(scene);

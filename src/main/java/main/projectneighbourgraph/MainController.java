@@ -13,24 +13,16 @@ import main.projectneighbourgraph.strategy.LinkStrategy;
 
 import java.util.ArrayList;
 
-//controlleur principale du logiciel
+//Main controller of the software
 
 public class MainController {
     @FXML private Label welcomeText;
 
     @FXML private Button refreshButton;
     @FXML private CanvasController canvasController;
+    @FXML private TableController tableController;
 
-
-    @FXML private TableView<Node> tableView;
-    @FXML private TableColumn<Node, String> pointNameColumn;
-    @FXML private TableColumn<Node, Double> xCoordColumn;
-    @FXML private TableColumn<Node, Double> yCoordColumn;
-    @FXML private TableColumn<Node, String> linkedToColumn;
-
-    public MainController(){
-
-    }
+    public MainController(){}
 
     private LinkStrategy strategy;
 
@@ -41,14 +33,9 @@ public class MainController {
         strategy.link(nodeList, arg);
     }
 
-    public void testTabView(){
-        pointNameColumn.setCellValueFactory(new PropertyValueFactory<Node, String>("id"));
-        xCoordColumn.setCellValueFactory(new PropertyValueFactory<Node, Double>("unitxPos"));
-        yCoordColumn.setCellValueFactory(new PropertyValueFactory<Node, Double>("unityPos"));
-        //linkedToColumn.setCellValueFactory(new PropertyValueFactory<Node, String>("id"));
-        tableView.getItems().add(new Node(250,250,0.5,0.5,1));
+    public TableController getTableController() {
+        return tableController;
     }
-
     public CanvasController getCanvasController() {
         return canvasController;
     }
