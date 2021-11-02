@@ -67,4 +67,19 @@ public class Node {
                 ", id=" + id +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Node node = (Node) o;
+
+        if (Double.compare(node.xPos, xPos) != 0) return false;
+        if (Double.compare(node.yPos, yPos) != 0) return false;
+        if (Double.compare(node.unitxPos, unitxPos) != 0) return false;
+        if (Double.compare(node.unityPos, unityPos) != 0) return false;
+        return id == node.id;
+    }
+
 }
