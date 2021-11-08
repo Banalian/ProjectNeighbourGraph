@@ -2,13 +2,7 @@ package main.projectneighbourgraph;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import main.projectneighbourgraph.graphdata.Node;
 import main.projectneighbourgraph.strategy.LinkStrategy;
 
 import java.util.ArrayList;
@@ -20,7 +14,7 @@ public class MainController {
 
     @FXML private Button refreshButton;
     @FXML private CanvasController canvasController;
-    @FXML private TableController tableController;
+    @FXML private StatsTableController statsTableController;
 
     public MainController(){}
 
@@ -33,8 +27,8 @@ public class MainController {
         strategy.link(nodeList, arg);
     }
 
-    public TableController getTableController() {
-        return tableController;
+    public StatsTableController getStatsTableController() {
+        return statsTableController;
     }
     public CanvasController getCanvasController() {
         return canvasController;

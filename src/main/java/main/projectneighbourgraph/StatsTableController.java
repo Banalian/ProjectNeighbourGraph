@@ -6,7 +6,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.projectneighbourgraph.graphdata.Node;
 
-public class TableController {
+public class StatsTableController {
 
     @FXML
     private TableView<Node> tableView;
@@ -14,13 +14,15 @@ public class TableController {
     @FXML private TableColumn<Node, Double> xCoordColumn;
     @FXML private TableColumn<Node, Double> yCoordColumn;
     @FXML private TableColumn<Node, String> linkedToColumn;
+    int test;
 
-    public TableController(){
+    public StatsTableController(){
         tableView = new TableView<Node>() ;
         pointNameColumn = new TableColumn<Node, String>();
         xCoordColumn = new TableColumn<Node, Double>();
         yCoordColumn = new TableColumn<Node, Double>();
         linkedToColumn = new TableColumn<Node, String>();
+        test=0;
     }
 
     public void testTabView(){

@@ -1,7 +1,6 @@
 package main.projectneighbourgraph;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,7 +15,8 @@ public class MainApplication extends Application {
         MainController mainController = fxmlLoader.getController();
 
         CanvasController canvasController = mainController.getCanvasController();
-        TableController tableController = mainController.getTableController();
+        StatsTableController statsTableController = new StatsTableController();
+               statsTableController = mainController.getStatsTableController();
 
         /// adds 2 listeners to do the resize action if necessary, since canvas don't have any resize properties by default.
         stage.widthProperty().addListener((ov, oldValue, newValue) -> {
@@ -28,7 +28,7 @@ public class MainApplication extends Application {
             canvasController.reDraw();
         });
 
-        tableController.testTabView();
+        statsTableController.testTabView();
 
         stage.setTitle("Neighbor Graph");
         stage.setScene(scene);
