@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.projectneighbourgraph.graphdata.Graph;
 
 import java.io.IOException;
 
@@ -16,7 +17,13 @@ public class MainApplication extends Application {
 
         CanvasController canvasController = mainController.getCanvasController();
         StatsTableController statsTableController = new StatsTableController();
-               statsTableController = mainController.getStatsTableController();
+        statsTableController = mainController.getStatsTableController();
+
+
+        Graph graphData = new Graph();
+        mainController.setGraphData(graphData);
+        canvasController.setGraphData(graphData);
+        statsTableController.setGraphData(graphData);
 
         /// adds 2 listeners to do the resize action if necessary, since canvas don't have any resize properties by default.
         stage.widthProperty().addListener((ov, oldValue, newValue) -> {

@@ -5,6 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import main.projectneighbourgraph.graphdata.Edge;
+import main.projectneighbourgraph.graphdata.Graph;
 import main.projectneighbourgraph.graphdata.Node;
 
 import java.util.ArrayList;
@@ -18,23 +19,28 @@ public class CanvasController {
 
     @FXML private Canvas canvas;
 
-    private ArrayList<Node> nodeArrayList;
-    private ArrayList<Edge> edgeArrayList;
+    //private ArrayList<Node> nodeArrayList;
+    //private ArrayList<Edge> edgeArrayList;
 
     private int pointCounter;
     private int size;
     private int frameMargin;
 
 
+    private Graph graphData;
+
     public CanvasController(){
-        nodeArrayList = new ArrayList<Node>();
-        edgeArrayList = new ArrayList<Edge>();
+        //nodeArrayList = new ArrayList<Node>();
+        //edgeArrayList = new ArrayList<Edge>();
 
         pointCounter = 0;
         size = 2;
         frameMargin = 10;
     }
 
+    public void setGraphData(Graph graphData) {
+        this.graphData = graphData;
+    }
 
     /**
      * Creates the frame with the class margin and canvas size
@@ -61,6 +67,24 @@ public class CanvasController {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
         createFrame();
+
+        ArrayList<Node> nodes = graphData.getNodeArrayList();
+        ArrayList<Edge> edges = graphData.getEdgeArrayList();
+
+        for(Node node : nodes){
+
+            double xToDraw = reMapVar(node.getUnitxPos(), 0,1,frameMargin,canvas.getWidth()+frameMargin);
+            double yToDraw = reMapVar(node.getUnityPos(), 0,1,canvas.getHeight()+frameMargin,frameMargin);
+            node.setxPos(xToDraw);
+            node.setyPos(yToDraw);
+            drawX(xToDraw, yToDraw, size, gc);
+        }
+
+        for(Edge edge : edges){
+            drawEdge(edge, gc);
+        }
+
+        /*
         for(Node node : nodeArrayList){
 
             double xToDraw = reMapVar(node.getUnitxPos(), 0,1,frameMargin,canvas.getWidth()+frameMargin);
@@ -73,6 +97,7 @@ public class CanvasController {
         for(Edge edge : edgeArrayList){
             drawEdge(edge, gc);
         }
+        */
     }
 
     /**
@@ -91,10 +116,14 @@ public class CanvasController {
             double xSetPos = reMapVar(xClicked-frameMargin,0,canvas.getWidth(),0,1);
             double ySetPos = reMapVar(yClicked-frameMargin,canvas.getHeight(),0,0,1);
             drawX(xClicked, yClicked,size, gc);
-            nodeArrayList.add(new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++));
-            System.out.println("New node array :\n"+nodeArrayList);
+            //nodeArrayList.add(new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++));
+            Node newNode = new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++);
+            graphData.addNode(newNode);
+            //System.out.println("New node array :\n"+nodeArrayList);
 
             //to comment/remove when not needed anymore
+            //TODO : rewrite if necessary with the new graph system
+            /*
             if(pointCounter%2 == 0){
                 System.out.println("test draw of Edge");
                 int nbNode = nodeArrayList.size();
@@ -102,6 +131,8 @@ public class CanvasController {
                 edgeArrayList.add(newEdge);
                 drawEdge(newEdge, gc);
             }
+            */
+
 
 
         }else{

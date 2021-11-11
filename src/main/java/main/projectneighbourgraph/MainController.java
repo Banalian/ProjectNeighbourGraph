@@ -3,6 +3,7 @@ package main.projectneighbourgraph;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import main.projectneighbourgraph.graphdata.Graph;
 import main.projectneighbourgraph.strategy.LinkStrategy;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class MainController {
     @FXML private Button refreshButton;
     @FXML private CanvasController canvasController;
     @FXML private StatsTableController statsTableController;
+
+    private Graph graphData;
 
     public MainController(){}
 
@@ -32,6 +35,10 @@ public class MainController {
     }
     public CanvasController getCanvasController() {
         return canvasController;
+    }
+
+    public void setGraphData(Graph graphData) {
+        this.graphData = graphData;
     }
 
     public void refresh(ActionEvent actionEvent) {

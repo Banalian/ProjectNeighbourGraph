@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import main.projectneighbourgraph.graphdata.Graph;
 import main.projectneighbourgraph.graphdata.Node;
 
 public class StatsTableController {
@@ -15,6 +16,8 @@ public class StatsTableController {
     @FXML private TableColumn<Node, Double> yCoordColumn;
     @FXML private TableColumn<Node, String> linkedToColumn;
     int test;
+
+    private Graph graphData;
 
     public StatsTableController(){
         tableView = new TableView<Node>() ;
@@ -33,5 +36,7 @@ public class StatsTableController {
         tableView.getItems().add(new Node(250,250,0.5,0.5,1));
     }
 
-
+    public void setGraphData(Graph graphData) {
+        this.graphData = graphData;
+    }
 }
