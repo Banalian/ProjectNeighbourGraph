@@ -1,5 +1,6 @@
 package main.projectneighbourgraph;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -30,6 +31,7 @@ public class CanvasController {
     private int frameMargin;
     private int pointsPerClick;
     private double radiusBrush;
+    private MainController MC;
 
 
     private Graph graphData;
@@ -41,6 +43,10 @@ public class CanvasController {
         pointCounter = 0;
         size = 2;
         frameMargin = 10;
+    }
+
+    public void setMainController(MainController MC){
+        this.MC = MC;
     }
 
     public void setGraphData(Graph graphData) {
@@ -142,6 +148,7 @@ public class CanvasController {
             //nodeArrayList.add(new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++));
             Node newNode = new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++);
             graphData.addNode(newNode);
+            this.MC.refresh(new ActionEvent());
             //System.out.println("New node array :\n"+nodeArrayList);
 
             //to comment/remove when not needed anymore

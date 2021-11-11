@@ -16,6 +16,7 @@ public class MainApplication extends Application {
         MainController mainController = fxmlLoader.getController();
 
         CanvasController canvasController = mainController.getCanvasController();
+        canvasController.setMainController(mainController);
         StatsTableController statsTableController = new StatsTableController();
         statsTableController = mainController.getStatsTableController();
 
