@@ -68,6 +68,11 @@ public class Node {
                 '}';
     }
 
+    /**
+     * Automatic function : checks if two nodes are the same
+     * @param o the object to check
+     * @return true if the object is the same node, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -33,4 +33,24 @@ public class Edge {
     public static int getEdgeTotal() {
         return edgeTotal;
     }
+
+
+    /**
+     * Automatic function : checks if two edges are the same
+     * @param o the object to check
+     * @return true if the object is the same edge, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Edge edge = (Edge) o;
+
+        if (edgeNb != edge.edgeNb) return false;
+        if (getNode1() != null ? !getNode1().equals(edge.getNode1()) : edge.getNode1() != null) return false;
+        return getNode2() != null ? getNode2().equals(edge.getNode2()) : edge.getNode2() == null;
+    }
+
+
 }
