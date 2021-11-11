@@ -89,6 +89,10 @@
                                                 <AnchorPane>
                                                     <children>
                                                         <fx:include fx:id="canvas" source="canvas.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Button fx:id="ButtonClick" layoutX="574.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionButtonClick" prefHeight="25.0" prefWidth="50.0" text="Click" />
+                                          <Button fx:id="ButtonBrush" layoutX="574.0" layoutY="46.0" mnemonicParsing="false" onAction="#onActionButtonBrush" prefHeight="25.0" prefWidth="50.0" text="Brush" />
+                                          <TextField fx:id="pointsPerClick" layoutX="575.0" layoutY="78.0" onAction="#getPointsPerClick" prefHeight="25.0" prefWidth="49.0" />
+                                          <TextField fx:id="radiusBrush" layoutX="575.0" layoutY="110.0" onAction="#getRadiusBrush" prefHeight="25.0" prefWidth="49.0" />
                                                     </children>
                                                 </AnchorPane>
                                                 <AnchorPane>
@@ -133,5 +137,6 @@
                 </TabPane>
             </children>
         </AnchorPane>
+      <TextField />
     </children>
 </VBox>
