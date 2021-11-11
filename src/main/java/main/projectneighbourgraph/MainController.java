@@ -3,8 +3,11 @@ package main.projectneighbourgraph;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Graph;
+import main.projectneighbourgraph.graphdata.Node;
 import main.projectneighbourgraph.strategy.LinkStrategy;
+import main.projectneighbourgraph.strategy.kNNLinkStrategy;
 
 import java.util.ArrayList;
 
@@ -30,8 +33,10 @@ public class MainController {
     void setStrategy(LinkStrategy strategy) {
         this.strategy = strategy;
     }
-    void executeStrategy(ArrayList nodeList, int arg){
-        strategy.link(nodeList, arg);
+    void executeStrategy(ArrayList<Node> nodeArrayList, int arg){
+        ArrayList<Edge> result = strategy.link(nodeArrayList, arg);
+        graphData.setEdgeArrayList(result);
+        canvasController.reDraw();
     }
 
     public StatsTableController getStatsTableController() {
@@ -62,6 +67,9 @@ public class MainController {
     }
 
     public void refresh(ActionEvent actionEvent) {
+        setStrategy(new kNNLinkStrategy());
+
+        executeStrategy(graphData.getNodeArrayList(), 2);
     }
 
     public void euclidianDistance(ActionEvent actionEvent) {

@@ -117,4 +117,8 @@ public class Graph {
         }
         edgeArrayList.remove(edgeToRemove);
     }
+
+    public void setEdgeArrayList(ArrayList<Edge> result) {
+        this.edgeArrayList = result;
+    }
 }

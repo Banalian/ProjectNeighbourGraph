@@ -15,7 +15,8 @@ public class kNNLinkStrategy implements LinkStrategy {
      * @param nodeList the list of nodes to link
      * @param arg the number of nearest neighbours to choose
      */
-    public ArrayList<Edge> link(ArrayList<Node> nodeList, int arg){
+    public ArrayList<Edge> link(ArrayList<Node> nodeList, int arg)
+    {
         //TODO : write the KNN alogrithm
         if(arg < 1)
             throw new IllegalArgumentException("Error : argument is too low, must be at least one");
@@ -25,21 +26,32 @@ public class kNNLinkStrategy implements LinkStrategy {
 
 
         double[][] distanceMatrix = MathGraph.getDistanceMatrix(nodeList);
+        double[] distanceToINode;
         ArrayList<Edge> edgeArrayList = new ArrayList<>();
         int nodeNb = nodeList.size();
-        for(int i=0; i<nodeNb;i++){
-            double[] distanceToINode = distanceMatrix[i];
 
-            int curI=0;
-            NearestNode[] nearestNodeArrays = new NearestNode[nodeNb-curI];
-            for(int j = curI+1; i<nodeNb;i++){
-                nearestNodeArrays[curI] = new NearestNode(j,distanceToINode[j]);
+        //for each node
+        for(int i = 0; i < nodeNb-1; i++){
+            //get all the distances to the i-th node
+            distanceToINode = distanceMatrix[i];
+
+            int curI=i;
+            //make a list of all nodes after the i-th node
+            NearestNode[] nearestNodeArrays = new NearestNode[nodeNb-i-1];
+            //for each node after the i-th node
+            for(int j = curI+1; j<nodeNb;j++,curI++){
+                //add the distance to the list
+                nearestNodeArrays[curI-i] = new NearestNode(j,distanceToINode[j]);
+                //nearestNodeArrays[j-curI+1] = new NearestNode(j,distanceToINode[j]);
             }
 
             NearestNode.SortDistance(nearestNodeArrays);
             //from here, there's the array with the distance sorted, and the node position in nodeArraylist attached
 
             for(int k = 0; k < arg; k++){
+                if(curI+k >= nodeNb){
+                    break;
+                }
                 NearestNode curNear = nearestNodeArrays[k];
                 //find the 2 nodes
                 Node node1 = nodeList.get(i);
