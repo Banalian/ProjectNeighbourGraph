@@ -7,8 +7,11 @@ import javafx.scene.input.MouseEvent;
 import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Graph;
 import main.projectneighbourgraph.graphdata.Node;
+import java.lang.Math;
+import java.util.Random;
 
 import java.util.ArrayList;
+import java.util.RandomAccess;
 
 /**
  * Controller for the whole canvas
@@ -25,6 +28,8 @@ public class CanvasController {
     private int pointCounter;
     private int size;
     private int frameMargin;
+    private int pointsPerClick;
+    private double radiusBrush;
 
 
     private Graph graphData;
@@ -40,6 +45,14 @@ public class CanvasController {
 
     public void setGraphData(Graph graphData) {
         this.graphData = graphData;
+    }
+
+    public void setPointsPerClick(int i){
+        pointsPerClick = i;
+    }
+
+    public void setRadiusBrush(double d){
+        radiusBrush = d;
     }
 
     /**
@@ -100,6 +113,16 @@ public class CanvasController {
         */
     }
 
+    public void changeMouseMode(int numberMode){
+        if (numberMode == 1){
+            canvas.setOnMouseClicked(this::addNewPoint);
+            canvas.setOnMouseDragged(null);
+        }
+        if (numberMode == 2){
+            canvas.setOnMouseClicked(this::addNewBrush);
+            canvas.setOnMouseDragged(this::addNewBrushDragged);
+        }
+    }
     /**
      * Adds a new point a the given MouseEvent location
      * will check if the position is valid, before adding the data and drawing the point
@@ -141,6 +164,79 @@ public class CanvasController {
 
     }
 
+    /**
+     * Adds new points in a circle around the mouse at the given MouseEvent location
+     * will check if the position is valid, before adding the data and drawing the point
+     * @param event the MouseEvent to use
+     */
+    @FXML
+    public void addNewBrush(MouseEvent event){
+        //System.out.println("you pressed !");
+        Random r = new Random();
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        double xClicked = event.getX();
+        double yClicked = event.getY();
+
+        if(posIsInFrame(xClicked, yClicked, frameMargin)){
+            double xSetPos = reMapVar(xClicked-frameMargin,0,canvas.getWidth(),0,1);
+            double ySetPos = reMapVar(yClicked-frameMargin,canvas.getHeight(),0,0,1);
+            int i = 0;
+            for(i = 0; i < this.pointsPerClick; i++){
+                double a = r.nextDouble()*Math.PI*2;
+                double b = r.nextDouble()*this.radiusBrush;
+                double x = xClicked + b * Math.cos(a);
+                double y = yClicked + b * Math.sin(a);
+                if(x <= xClicked+this.radiusBrush & x > xClicked-this.radiusBrush & y <= yClicked+this.radiusBrush & y > yClicked-this.radiusBrush) {
+                    drawX(x, y, size, gc);
+                    Node newNode = new Node(x, y,xSetPos,ySetPos, pointCounter++);
+                    graphData.addNode(newNode);
+                }
+            }
+
+        }else{
+            System.out.println("Position not in frame");
+        }
+
+
+    }
+
+    /**
+     * Adds new points in a circle around the mouse at the given MouseEvent location
+     * will check if the position is valid, before adding the data and drawing the point
+     * @param event the MouseEvent to use
+     */
+    @FXML
+    public void addNewBrushDragged(MouseEvent event){
+        //System.out.println("you pressed !");
+        Random r = new Random();
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        double xClicked = event.getX();
+        double yClicked = event.getY();
+
+        if(posIsInFrame(xClicked, yClicked, frameMargin)){
+            double xSetPos = reMapVar(xClicked-frameMargin,0,canvas.getWidth(),0,1);
+            double ySetPos = reMapVar(yClicked-frameMargin,canvas.getHeight(),0,0,1);
+            int i = 0;
+            for(i = 0; i < this.pointsPerClick; i++){
+                double a = r.nextDouble()*Math.PI*2;
+                double b = r.nextDouble()*this.radiusBrush;
+                double x = xClicked + b * Math.cos(a);
+                double y = yClicked + b * Math.sin(a);
+                if(x <= xClicked+this.radiusBrush & x > xClicked-this.radiusBrush & y <= yClicked+this.radiusBrush & y > yClicked-this.radiusBrush) {
+                    drawX(x, y, size, gc);
+                    Node newNode = new Node(x, y,xSetPos,ySetPos, pointCounter++);
+                    graphData.addNode(newNode);
+                }
+            }
+
+        }else{
+            System.out.println("Position not in frame");
+        }
+
+
+    }
 
     /**
      * Checks if a given position is within a certain frame with a margin
