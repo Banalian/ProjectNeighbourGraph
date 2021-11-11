@@ -178,27 +178,26 @@ public class CanvasController {
         double xClicked = event.getX();
         double yClicked = event.getY();
 
-        if(posIsInFrame(xClicked, yClicked, frameMargin)){
-            double xSetPos = reMapVar(xClicked-frameMargin,0,canvas.getWidth(),0,1);
-            double ySetPos = reMapVar(yClicked-frameMargin,canvas.getHeight(),0,0,1);
-            int i = 0;
-            for(i = 0; i < this.pointsPerClick; i++){
-                double a = r.nextDouble()*Math.PI*2;
-                double b = r.nextDouble()*this.radiusBrush;
-                double x = xClicked + b * Math.cos(a);
-                double y = yClicked + b * Math.sin(a);
+        int i = 0;
+        for(i = 0; i < this.pointsPerClick; i++){
+            double a = r.nextDouble()*Math.PI*2;
+            double b = r.nextDouble()*this.radiusBrush;
+            double x = xClicked + b * Math.cos(a);
+            double y = yClicked + b * Math.sin(a);
+
+            if(posIsInFrame(x, y, frameMargin)){
+                double xSetPos = reMapVar(x-frameMargin,0,canvas.getWidth(),0,1);
+                double ySetPos = reMapVar(y-frameMargin,canvas.getHeight(),0,0,1);
                 if(x <= xClicked+this.radiusBrush & x > xClicked-this.radiusBrush & y <= yClicked+this.radiusBrush & y > yClicked-this.radiusBrush) {
                     drawX(x, y, size, gc);
                     Node newNode = new Node(x, y,xSetPos,ySetPos, pointCounter++);
                     graphData.addNode(newNode);
                 }
+
+            }else{
+                System.out.println("Position not in frame");
             }
-
-        }else{
-            System.out.println("Position not in frame");
         }
-
-
     }
 
     /**
@@ -215,24 +214,25 @@ public class CanvasController {
         double xClicked = event.getX();
         double yClicked = event.getY();
 
-        if(posIsInFrame(xClicked, yClicked, frameMargin)){
-            double xSetPos = reMapVar(xClicked-frameMargin,0,canvas.getWidth(),0,1);
-            double ySetPos = reMapVar(yClicked-frameMargin,canvas.getHeight(),0,0,1);
-            int i = 0;
-            for(i = 0; i < this.pointsPerClick; i++){
-                double a = r.nextDouble()*Math.PI*2;
-                double b = r.nextDouble()*this.radiusBrush;
-                double x = xClicked + b * Math.cos(a);
-                double y = yClicked + b * Math.sin(a);
+        int i = 0;
+        for(i = 0; i < this.pointsPerClick; i++){
+            double a = r.nextDouble()*Math.PI*2;
+            double b = r.nextDouble()*this.radiusBrush;
+            double x = xClicked + b * Math.cos(a);
+            double y = yClicked + b * Math.sin(a);
+
+            if(posIsInFrame(x, y, frameMargin)){
+                double xSetPos = reMapVar(x-frameMargin,0,canvas.getWidth(),0,1);
+                double ySetPos = reMapVar(y-frameMargin,canvas.getHeight(),0,0,1);
                 if(x <= xClicked+this.radiusBrush & x > xClicked-this.radiusBrush & y <= yClicked+this.radiusBrush & y > yClicked-this.radiusBrush) {
                     drawX(x, y, size, gc);
                     Node newNode = new Node(x, y,xSetPos,ySetPos, pointCounter++);
                     graphData.addNode(newNode);
                 }
-            }
 
-        }else{
-            System.out.println("Position not in frame");
+            }else{
+                System.out.println("Position not in frame");
+            }
         }
 
 
