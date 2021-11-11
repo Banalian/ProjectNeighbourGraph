@@ -115,10 +115,10 @@ public class MathGraph {
      * @param nodeArrayList the list of Nodes to make the matrix from
      * @return a square matrix of dimension 2 (dim2 array) and nodeNb size filled with the distances between two nodes A and B
      */
-    private static double[][] makeDistanceMatrix(ArrayList<Node> nodeArrayList){
+    public static double[][] getDistanceMatrix(ArrayList<Node> nodeArrayList){
         int nodeNb = nodeArrayList.size();
         int curNode1 = 0;
-        int curNode2 = 0;
+        int curNode2;
         double[][] distanceMatrix = new double[nodeNb][nodeNb];
 
         // we go through the list for the first node
