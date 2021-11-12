@@ -40,12 +40,12 @@ public class StatsTableController {
     }
 
     public void reDraw(){
-        int Pointname = 1;
+        int pointname = 1;
 
         ArrayList<Node> nodes = graphData.getNodeArrayList();
         tableView.getItems().clear();
         for (Node node : nodes) {
-            tableView.getItems().add(new Node(250, 250, node.getUnitxPos(), node.getUnityPos(),Pointname++));
+            tableView.getItems().add(new Node(250, 250, node.getUnitxPos(), node.getUnityPos(),pointname++));
         }
 
     }
