@@ -4,10 +4,25 @@ package main.projectneighbourgraph.graphdata;
  * Data class for a node, containing its canvas position and relative position for our range
  */
 public class Node {
+    /**
+     * The canvas x position of the node
+     */
     private double xPos;
+    /**
+     * The canvas y position of the node
+     */
     private double yPos;
+    /**
+     * The relative x position of the node (between 0 and 1)
+     */
     private double unitxPos;
+    /**
+     * The relative y position of the node (between 0 and 1)
+     */
     private double unityPos;
+    /**
+     * The node's id
+     */
     private int id;
     //private colorClass colorClass;
 
@@ -57,6 +72,10 @@ public class Node {
     }
 
 
+    /**
+     * Automatic function : create a string representation of the node
+     * @return a string representation of the node
+     */
     @Override
     public String toString() {
         return "Node{" +

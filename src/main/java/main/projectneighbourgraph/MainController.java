@@ -24,15 +24,31 @@ public class MainController {
     @FXML private CanvasController canvasController;
     @FXML private StatsTableController statsTableController;
 
+    /**
+     * reference to the graph and its data (nodes and edges)
+     */
     private Graph graphData;
 
     public MainController(){}
 
+    /**
+     * strategy for the link creation
+     */
     private LinkStrategy strategy;
 
+    /**
+     * set the strategy for the link creation
+     * @param strategy the new strategy to use
+     */
     void setStrategy(LinkStrategy strategy) {
         this.strategy = strategy;
     }
+
+    /**
+     * execute the strategy on the node list
+     * @param nodeArrayList the node list
+     * @param arg argument for the strategy (like for exemple the number of neighbours for kNN)
+     */
     void executeStrategy(ArrayList<Node> nodeArrayList, int arg){
         ArrayList<Edge> result = strategy.link(nodeArrayList, arg);
         graphData.setEdgeArrayList(result);
@@ -66,6 +82,10 @@ public class MainController {
         this.graphData = graphData;
     }
 
+    /**
+     * refresh the links of the node of the graph, using the current strategy
+     * @param actionEvent the event
+     */
     public void refresh(ActionEvent actionEvent) {
         setStrategy(new kNNLinkStrategy());
 
@@ -78,7 +98,12 @@ public class MainController {
     public void sineDistance(ActionEvent actionEvent) {
     }
 
+    /**
+     * Action to set the new strategy to the kNN strategy
+     * @param actionEvent the event
+     */
     public void kNNLink(ActionEvent actionEvent) {
+        setStrategy(new kNNLinkStrategy());
     }
 
     public void egraphLink(ActionEvent actionEvent) {
