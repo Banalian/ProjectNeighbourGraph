@@ -121,4 +121,9 @@ public class Graph {
     public void setEdgeArrayList(ArrayList<Edge> result) {
         this.edgeArrayList = result;
     }
+
+    public void clearAll() {
+        nodeArrayList.clear();
+        edgeArrayList.clear();
+    }
 }

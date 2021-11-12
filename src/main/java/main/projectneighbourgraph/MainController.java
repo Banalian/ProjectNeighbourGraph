@@ -96,4 +96,10 @@ public class MainController {
 
     public void relativeLink(ActionEvent actionEvent) {
     }
+
+    public void clearAll(ActionEvent actionEvent) {
+        graphData.clearAll();
+        statsTableController.reDraw();
+        canvasController.reDraw();
+    }
 }
