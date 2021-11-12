@@ -38,7 +38,6 @@ public class MainController {
         ArrayList<Edge> result = strategy.link(nodeArrayList, arg);
         graphData.setEdgeArrayList(result);
         canvasController.reDraw();
-        statsTableController.reDraw();
     }
 
     //statsTableController.
@@ -73,9 +72,10 @@ public class MainController {
     }
 
     public void refresh(ActionEvent actionEvent) {
-        setStrategy(new kNNLinkStrategy());
-
-        executeStrategy(graphData.getNodeArrayList(), 2);
+        statsTableController.reDraw();
+        if(strategy!= null){
+            executeStrategy(graphData.getNodeArrayList(), 2);
+        }
     }
 
     public void euclidianDistance(ActionEvent actionEvent) {
@@ -85,6 +85,7 @@ public class MainController {
     }
 
     public void kNNLink(ActionEvent actionEvent) {
+        setStrategy(new kNNLinkStrategy());
     }
 
     public void egraphLink(ActionEvent actionEvent) {

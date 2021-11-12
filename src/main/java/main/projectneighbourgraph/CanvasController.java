@@ -19,7 +19,7 @@ import java.util.RandomAccess;
  * currently handles the drawing of points, the data for the points and anything related to that canvas
  */
 public class CanvasController {
-
+    //TODO: change to remove the need for the reference to the main controller
 
     @FXML private Canvas canvas;
 
@@ -185,7 +185,7 @@ public class CanvasController {
         double xClicked = event.getX();
         double yClicked = event.getY();
 
-        int i = 0;
+        int i;
         for(i = 0; i < this.pointsPerClick; i++){
             double a = r.nextDouble()*Math.PI*2;
             double b = r.nextDouble()*this.radiusBrush;
@@ -221,7 +221,7 @@ public class CanvasController {
         double xClicked = event.getX();
         double yClicked = event.getY();
 
-        int i = 0;
+        int i;
         for(i = 0; i < this.pointsPerClick; i++){
             double a = r.nextDouble()*Math.PI*2;
             double b = r.nextDouble()*this.radiusBrush;
