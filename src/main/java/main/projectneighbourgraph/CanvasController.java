@@ -21,19 +21,32 @@ import java.util.RandomAccess;
 public class CanvasController {
     //TODO: change to remove the need for the reference to the main controller
 
+    /**
+     * the canvas to draw on
+     */
     @FXML private Canvas canvas;
 
     //private ArrayList<Node> nodeArrayList;
     //private ArrayList<Edge> edgeArrayList;
 
     private int pointCounter;
+
+    /**
+     * pixel size of the points to draw
+     */
     private int size;
+    /**
+     * margin to give to the canvas (in all directions) (in pixels)
+     */
     private int frameMargin;
+
     private int pointsPerClick;
     private double radiusBrush;
     private MainController MC;
 
-
+    /**
+     * reference to the graph and its data (nodes and edges)
+     */
     private Graph graphData;
 
     public CanvasController(){

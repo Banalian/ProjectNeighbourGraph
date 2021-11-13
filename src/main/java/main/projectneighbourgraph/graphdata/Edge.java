@@ -2,10 +2,17 @@ package main.projectneighbourgraph.graphdata;
 
 /**
  * Class to store an Edge, with is a line between two nodes.
+ * You could use them as directed or undirected(using node1 as the start node for a directed edge).
  */
 public class Edge {
 
+    /**
+     * The first node of the edge.
+     */
     private Node node1;
+    /**
+     * The second node of the edge.
+     */
     private Node node2;
 
     static private int edgeTotal = 0;
@@ -30,6 +37,10 @@ public class Edge {
         return node2;
     }
 
+    /**
+     * get the total number of edges created since the start of the program
+     * @return the total number of edges
+     */
     public static int getEdgeTotal() {
         return edgeTotal;
     }

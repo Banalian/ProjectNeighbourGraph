@@ -7,8 +7,15 @@ import java.util.ArrayList;
  */
 public class Graph {
 
+    /**
+     * List of all the nodes
+     */
     private ArrayList<Node> nodeArrayList;
+    /**
+     * List of all the edges
+     */
     private ArrayList<Edge> edgeArrayList;
+
     private static int nextGraphId = 0;
     private int graphId;
 

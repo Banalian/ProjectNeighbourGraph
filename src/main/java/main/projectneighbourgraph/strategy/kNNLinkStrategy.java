@@ -8,6 +8,9 @@ import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Node;
 import main.projectneighbourgraph.math.MathGraph;
 
+/**
+ * Class that implements the k Nearest Neighbours algorithm using the LinkStrategy interface.
+ */
 public class kNNLinkStrategy implements LinkStrategy {
 
     /**
@@ -17,14 +20,16 @@ public class kNNLinkStrategy implements LinkStrategy {
      */
     public ArrayList<Edge> link(ArrayList<Node> nodeList, int arg)
     {
-        //TODO : write the KNN alogrithm
+        //TODO : fix the algorithm
+
+        //check if the argument is valid
         if(arg < 1)
             throw new IllegalArgumentException("Error : argument is too low, must be at least one");
         if(arg > nodeList.size())
             throw new IllegalArgumentException("Error : argument is too high, must be less than the numbers of nodes");
 
 
-
+        //create the distance matrix and initialize the variables
         double[][] distanceMatrix = MathGraph.getDistanceMatrix(nodeList);
         double[] distanceToINode;
         ArrayList<Edge> edgeArrayList = new ArrayList<>();
@@ -48,7 +53,9 @@ public class kNNLinkStrategy implements LinkStrategy {
             NearestNode.SortDistance(nearestNodeArrays);
             //from here, there's the array with the distance sorted, and the node position in nodeArraylist attached
 
+            //for k nearest neighbours
             for(int k = 0; k < arg; k++){
+                //if there isn't enough nodes, we stop
                 if(curI+k >= nodeNb){
                     break;
                 }
@@ -56,6 +63,7 @@ public class kNNLinkStrategy implements LinkStrategy {
                 //find the 2 nodes
                 Node node1 = nodeList.get(i);
                 Node node2 = nodeList.get(curNear.Position);
+                //create the edge and add it to the list
                 edgeArrayList.add(new Edge(node1,node2));
             }
         }
@@ -66,7 +74,10 @@ public class kNNLinkStrategy implements LinkStrategy {
 
 }
 
-
+/**
+ * Class that contains the position and the distance of a node
+ * used in the kNN algorithm to sort the nodes by distance
+ */
 class NearestNode
 {
     public NearestNode(int position, double distance)
@@ -85,6 +96,9 @@ class NearestNode
 
 }
 
+/**
+ * Comparator that compares the distance of 2 NearestNode
+ */
 class DistanceSort implements Comparator<NearestNode>
 {
     public int compare(NearestNode o1, NearestNode o2)
