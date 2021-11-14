@@ -20,8 +20,6 @@ public class kNNLinkStrategy implements LinkStrategy {
      */
     public ArrayList<Edge> link(ArrayList<Node> nodeList, int arg)
     {
-        //TODO : fix the algorithm
-
         //check if the argument is valid
         if(arg < 1)
             throw new IllegalArgumentException("Error : argument is too low, must be at least one");
@@ -34,7 +32,44 @@ public class kNNLinkStrategy implements LinkStrategy {
         double[] distanceToINode;
         ArrayList<Edge> edgeArrayList = new ArrayList<>();
         int nodeNb = nodeList.size();
+        boolean addEdge = true;
 
+        //for each node, sort the distance to the other node
+        for(int i = 0; i < nodeNb; i++){
+            distanceToINode = distanceMatrix[i];
+
+            NearestNode[] nearestNodes = new NearestNode[nodeNb];
+            for(int j = 0; j < nodeNb; j++){
+                nearestNodes[j] = new NearestNode(j, distanceToINode[j]);
+            }
+
+            //sort the array
+            NearestNode.SortDistance(nearestNodes);
+
+            //keep the k nearest neighbours to create edges
+            for(int k = 1; k <= arg; k++){
+                //we check if the possible edge already exists/was already created
+                for(Edge edge : edgeArrayList){
+
+                    if( (edge.getNode1() == nodeList.get(nearestNodes[k].Position)) &&
+                        (edge.getNode2() == nodeList.get(i)))
+                    {
+                        //the edge already exists, so we don't add it
+                        addEdge = false;
+                        break;
+                    }
+                }
+                if(addEdge){
+                    edgeArrayList.add(new Edge(nodeList.get(i), nodeList.get(nearestNodes[k].Position)));
+                }else{
+                    addEdge = true;
+                }
+
+            }
+
+        }
+
+        /*
         //for each node
         for(int i = 0; i < nodeNb-1; i++){
             //get all the distances to the i-th node
@@ -67,7 +102,7 @@ public class kNNLinkStrategy implements LinkStrategy {
                 edgeArrayList.add(new Edge(node1,node2));
             }
         }
-
+        */
 
         return edgeArrayList;
     }
