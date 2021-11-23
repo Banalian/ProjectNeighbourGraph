@@ -1,5 +1,7 @@
 package main.projectneighbourgraph.graphdata;
 
+import javafx.scene.paint.Color;
+
 /**
  * Data class for a node, containing its canvas position and relative position for our range
  */
@@ -25,14 +27,46 @@ public class Node {
      * The node's id
      */
     private int id;
-    //private colorClass colorClass;
 
+    /**
+        The node's color
+     */
+    private Color nodeColor;
+
+
+    /**
+     * Normal Constructor, no color needed
+     * @param xPos the x position of the node
+     * @param yPos the y position of the node
+     * @param unitxPos the relative x position of the node (between 0 and 1)
+     * @param unityPos the relative y position of the node (between 0 and 1)
+     * @param id the node's id
+     */
     public Node(double xPos, double yPos, double unitxPos, double unityPos, int id){
         this.xPos = xPos;
         this.yPos = yPos;
         this.unitxPos = unitxPos;
         this.unityPos = unityPos;
         this.id = id;
+        this.nodeColor = null;
+    }
+
+    /**
+     * Constructor with color
+     * @param xPos the x position of the node
+     * @param yPos the y position of the node
+     * @param unitxPos the relative x position of the node (between 0 and 1)
+     * @param unityPos the relative y position of the node (between 0 and 1)
+     * @param id the node's id
+     * @param nodeColor the node's color
+     */
+    public Node(double xPos, double yPos, double unitxPos, double unityPos, int id, Color nodeColor) {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.unitxPos = unitxPos;
+        this.unityPos = unityPos;
+        this.id = id;
+        this.nodeColor = nodeColor;
     }
 
     public double getxPos() {
@@ -68,6 +102,14 @@ public class Node {
         this.unityPos = unityPos;
     }
 
+    public Color getNodeColor() {
+        return nodeColor;
+    }
+
+    public void setNodeColor(Color nodeColor) {
+        this.nodeColor = nodeColor;
+    }
+
     public int getId() {
         return id;
     }
@@ -84,6 +126,7 @@ public class Node {
                 ", yPos=" + yPos +
                 ", unitxPos=" + unitxPos +
                 ", unityPos=" + unityPos +
+                ", color=" + nodeColor +
                 ", id=" + id +
                 '}';
     }

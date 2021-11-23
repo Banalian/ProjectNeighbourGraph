@@ -1,5 +1,7 @@
 package main.projectneighbourgraph.graphdata;
 
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 
 /**
@@ -15,6 +17,11 @@ public class Graph {
      * List of all the edges
      */
     private ArrayList<Edge> edgeArrayList;
+
+    /**
+     * The color to use to create new nodes
+     */
+    private Color colorToUse;
 
     private static int nextGraphId = 0;
     private int graphId;
@@ -46,6 +53,21 @@ public class Graph {
         return graphId;
     }
 
+    /**
+     * get the color to use to create new nodes
+     * @return the color to use to create new nodes
+     */
+    public Color getColorToUse() {
+        return colorToUse;
+    }
+
+    /**
+     * set the new color to use to create new nodes
+     * @param newColorToUse the color to use to create new nodes
+     */
+    public void setColorToUse(Color newColorToUse) {
+        this.colorToUse = newColorToUse;
+    }
 
     /**
      * checks if a node is in the current list
