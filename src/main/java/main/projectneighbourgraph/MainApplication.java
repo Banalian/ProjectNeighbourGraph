@@ -13,7 +13,7 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         // Load the FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("IHM_graphes_2D_v2.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load());
         MainController mainController = fxmlLoader.getController();
 
         // get references to the controllers

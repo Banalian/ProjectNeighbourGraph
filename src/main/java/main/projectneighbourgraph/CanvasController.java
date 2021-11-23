@@ -54,7 +54,7 @@ public class CanvasController {
         //edgeArrayList = new ArrayList<Edge>();
 
         pointCounter = 0;
-        size = 2;
+        size = 1;
         frameMargin = 10;
     }
 
