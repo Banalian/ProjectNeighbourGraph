@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Graph;
 import main.projectneighbourgraph.graphdata.Node;
@@ -145,6 +149,7 @@ public class CanvasController {
     /**
      * Adds a new point a the given MouseEvent location
      * will check if the position is valid, before adding the data and drawing the point
+     * the color of the node/point will be taken from graphData, whether it's null or not
      * @param event the MouseEvent to use
      */
     @FXML
@@ -159,7 +164,8 @@ public class CanvasController {
             double ySetPos = reMapVar(yClicked-frameMargin,canvas.getHeight(),0,0,1);
             drawX(xClicked, yClicked,size, gc);
             //nodeArrayList.add(new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++));
-            Node newNode = new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++);
+            Color color = graphData.getColorToUse();
+            Node newNode = new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++, color);
             graphData.addNode(newNode);
             this.MC.refresh(new ActionEvent());
             //System.out.println("New node array :\n"+nodeArrayList);
@@ -275,12 +281,19 @@ public class CanvasController {
 
     /**
      * Draw a circle with a X in it at the given position
+     * If no color is set in graphData, it will use a black color
      * @param centerX the x position of the center of the point
      * @param centerY the y position of the center of the point
      * @param size size of the point to draw
      * @param gc GraphicsContext to draw to
      */
     private void drawX(double centerX, double centerY, double size, GraphicsContext gc){
+
+        Color color = graphData.getColorToUse();
+        if(color == null) color = Color.BLACK;
+
+        gc.setFill(color);
+
         gc.strokeLine(
                 centerX-size,
                 centerY-size,
@@ -317,6 +330,17 @@ public class CanvasController {
      * @param gc the GraphicsContext to draw on
      */
     public void drawLineBetweenTwoPoint(Node point1, Node point2, GraphicsContext gc){
+
+        Color point1Color = point1.getNodeColor();
+        Color point2Color = point2.getNodeColor();
+        if(point1Color == null) point1Color = Color.BLACK;
+        if(point2Color == null) point2Color = Color.BLACK;
+
+        Stop[] stops = new Stop[] { new Stop(0, point1Color), new Stop(1, point2Color)};
+        LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+
+        gc.setFill(lg1);
+
         gc.strokeLine(
                 point1.getxPos(),
                 point1.getyPos(),
