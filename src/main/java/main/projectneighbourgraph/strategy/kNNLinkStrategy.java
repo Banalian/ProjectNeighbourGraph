@@ -23,8 +23,15 @@ public class kNNLinkStrategy implements LinkStrategy {
         //check if the argument is valid
         if(arg < 1)
             throw new IllegalArgumentException("Error : argument is too low, must be at least one");
-        if(arg > nodeList.size())
-            throw new IllegalArgumentException("Error : argument is too high, must be less than the numbers of nodes");
+        if(arg > nodeList.size()){
+            //commented because it's not a problem, better to just warn the user
+            //throw new IllegalArgumentException("Error : argument is too high, must be less than the numbers of nodes");
+            System.out.println("Warning : argument is too high, must be less than the numbers of nodes\n"+
+                    "No edges added");
+            return new ArrayList<>();
+        }
+
+
 
 
         //create the distance matrix and initialize the variables
@@ -48,6 +55,9 @@ public class kNNLinkStrategy implements LinkStrategy {
 
             //keep the k nearest neighbours to create edges
             for(int k = 1; k <= arg; k++){
+                if(k >= nodeList.size()){
+                    break;
+                }
                 //we check if the possible edge already exists/was already created
                 for(Edge edge : edgeArrayList){
 
