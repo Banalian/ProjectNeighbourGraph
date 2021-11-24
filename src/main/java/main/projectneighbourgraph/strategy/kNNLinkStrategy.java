@@ -23,8 +23,15 @@ public class kNNLinkStrategy implements LinkStrategy {
         //check if the argument is valid
         if(arg < 1)
             throw new IllegalArgumentException("Error : argument is too low, must be at least one");
-        if(arg > nodeList.size())
-            throw new IllegalArgumentException("Error : argument is too high, must be less than the numbers of nodes");
+        if(arg > nodeList.size()){
+            //commented because it's not a problem, better to just warn the user
+            //throw new IllegalArgumentException("Error : argument is too high, must be less than the numbers of nodes");
+            System.out.println("Warning : argument is too high, must be less than the numbers of nodes\n"+
+                    "No edges added");
+            return new ArrayList<>();
+        }
+
+
 
 
         //create the distance matrix and initialize the variables
@@ -48,6 +55,9 @@ public class kNNLinkStrategy implements LinkStrategy {
 
             //keep the k nearest neighbours to create edges
             for(int k = 1; k <= arg; k++){
+                if(k >= nodeList.size()){
+                    break;
+                }
                 //we check if the possible edge already exists/was already created
                 for(Edge edge : edgeArrayList){
 
@@ -68,41 +78,6 @@ public class kNNLinkStrategy implements LinkStrategy {
             }
 
         }
-
-        /*
-        //for each node
-        for(int i = 0; i < nodeNb-1; i++){
-            //get all the distances to the i-th node
-            distanceToINode = distanceMatrix[i];
-
-            int curI=i;
-            //make a list of all nodes after the i-th node
-            NearestNode[] nearestNodeArrays = new NearestNode[nodeNb-i-1];
-            //for each node after the i-th node
-            for(int j = curI+1; j<nodeNb;j++,curI++){
-                //add the distance to the list
-                nearestNodeArrays[curI-i] = new NearestNode(j,distanceToINode[j]);
-                //nearestNodeArrays[j-curI+1] = new NearestNode(j,distanceToINode[j]);
-            }
-
-            NearestNode.SortDistance(nearestNodeArrays);
-            //from here, there's the array with the distance sorted, and the node position in nodeArraylist attached
-
-            //for k nearest neighbours
-            for(int k = 0; k < arg; k++){
-                //if there isn't enough nodes, we stop
-                if(curI+k >= nodeNb){
-                    break;
-                }
-                NearestNode curNear = nearestNodeArrays[k];
-                //find the 2 nodes
-                Node node1 = nodeList.get(i);
-                Node node2 = nodeList.get(curNear.Position);
-                //create the edge and add it to the list
-                edgeArrayList.add(new Edge(node1,node2));
-            }
-        }
-        */
 
         return edgeArrayList;
     }
