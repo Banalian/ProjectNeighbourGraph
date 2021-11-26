@@ -1,5 +1,6 @@
 package main.projectneighbourgraph.graphdata;
 
+import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
 /**

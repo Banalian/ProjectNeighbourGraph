@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -216,7 +217,7 @@ public class CanvasController {
                 double ySetPos = reMapVar(y-frameMargin,canvas.getHeight(),0,0,1);
                 if(x <= xClicked+this.radiusBrush & x > xClicked-this.radiusBrush & y <= yClicked+this.radiusBrush & y > yClicked-this.radiusBrush) {
                     drawX(x, y, size, gc);
-                    Node newNode = new Node(x, y,xSetPos,ySetPos, pointCounter++);
+                    Node newNode = new Node(x, y,xSetPos,ySetPos, pointCounter++, graphData.getColorToUse());
                     graphData.addNode(newNode);
                 }
 
@@ -252,7 +253,7 @@ public class CanvasController {
                 double ySetPos = reMapVar(y-frameMargin,canvas.getHeight(),0,0,1);
                 if(x <= xClicked+this.radiusBrush & x > xClicked-this.radiusBrush & y <= yClicked+this.radiusBrush & y > yClicked-this.radiusBrush) {
                     drawX(x, y, size, gc);
-                    Node newNode = new Node(x, y,xSetPos,ySetPos, pointCounter++);
+                    Node newNode = new Node(x, y,xSetPos,ySetPos, pointCounter++, graphData.getColorToUse());
                     graphData.addNode(newNode);
                 }
 
@@ -290,9 +291,10 @@ public class CanvasController {
     private void drawX(double centerX, double centerY, double size, GraphicsContext gc){
 
         Color color = graphData.getColorToUse();
+        System.out.println(color);
         if(color == null) color = Color.BLACK;
 
-        gc.setFill(color);
+        gc.setStroke(color);
 
         gc.strokeLine(
                 centerX-size,
@@ -339,7 +341,7 @@ public class CanvasController {
         Stop[] stops = new Stop[] { new Stop(0, point1Color), new Stop(1, point2Color)};
         LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
 
-        gc.setFill(lg1);
+        gc.setStroke(lg1);
 
         gc.strokeLine(
                 point1.getxPos(),

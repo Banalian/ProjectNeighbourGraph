@@ -3,6 +3,7 @@ package main.projectneighbourgraph;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Graph;
 import main.projectneighbourgraph.graphdata.Node;
@@ -22,6 +23,7 @@ public class MainController {
     @FXML private Button ButtonBrush;
     @FXML private TextField radiusBrush;
     @FXML private TextField pointsPerClick;
+    @FXML private ColorPicker colorPick;
 
     @FXML private CanvasController canvasController;
     @FXML private StatsTableController statsTableController;
@@ -129,5 +131,9 @@ public class MainController {
         graphData.clearAll();
         statsTableController.reDraw();
         canvasController.reDraw();
+    }
+
+    public void chooseColor(ActionEvent actionEvent) {
+        graphData.setColorToUse(colorPick.getValue());
     }
 }
