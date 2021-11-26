@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -17,7 +16,6 @@ import java.lang.Math;
 import java.util.Random;
 
 import java.util.ArrayList;
-import java.util.RandomAccess;
 
 /**
  * Controller for the whole canvas
@@ -31,8 +29,6 @@ public class CanvasController {
      */
     @FXML private Canvas canvas;
 
-    //private ArrayList<Node> nodeArrayList;
-    //private ArrayList<Edge> edgeArrayList;
 
     private int pointCounter;
 
@@ -50,13 +46,11 @@ public class CanvasController {
     private MainController MC;
 
     /**
-     * reference to the graph and its data (nodes and edges)
+     * reference to the graph and its data (nodes, edges and color)
      */
     private Graph graphData;
 
     public CanvasController(){
-        //nodeArrayList = new ArrayList<Node>();
-        //edgeArrayList = new ArrayList<Edge>();
 
         pointCounter = 0;
         size = 1;
@@ -153,7 +147,6 @@ public class CanvasController {
             Color color = graphData.getColorToUse();
 
             drawX(xClicked, yClicked,size, gc, color);
-            //nodeArrayList.add(new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++));
             Node newNode = new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++, color);
             graphData.addNode(newNode);
             this.MC.refresh(new ActionEvent());
@@ -264,6 +257,7 @@ public class CanvasController {
      * @param centerY the y position of the center of the point
      * @param size size of the point to draw
      * @param gc GraphicsContext to draw to
+     * @param color the color to use to draw
      */
     private void drawX(double centerX, double centerY, double size, GraphicsContext gc, Color color){
 
@@ -290,7 +284,7 @@ public class CanvasController {
     }
 
     /**
-     * Draw the edge between two points, using an Edge. Will be expanded to work with classes later on
+     * Draw the edge between two points, using an Edge.
      * @param edge the edge to draw
      * @param gc the GraphicsContext to draw on
      */
@@ -300,7 +294,7 @@ public class CanvasController {
 
     /**
      * Draw a line between the two points, using their canvas position.
-     *
+     * Uses the color from the nodes to make a gradient line.
      * @param point1 the first node
      * @param point2 the second node
      * @param gc the GraphicsContext to draw on
@@ -309,6 +303,7 @@ public class CanvasController {
 
         Color point1Color;
         Color point2Color;
+        // to make sure that the gradient is in the correct direction
         if(point1.getUnitxPos() <= point2.getUnitxPos()){
             point1Color = point1.getNodeColor();
             point2Color = point2.getNodeColor();
@@ -351,7 +346,7 @@ public class CanvasController {
 
     /**
      * Re-maps a number from one range to another.
-     * That is, a value of fromLow would get mapped to toLow, a value of fromHigh to toHigh, values in-between to values in-between, etc.
+     * That is, a value of in_min would get mapped to out_min, a value of in_max to out_max, values in-between to values in-between, etc.
      * @param x the parameter that'll be remapped
      * @param in_min min range of current x
      * @param in_max max range of current x
