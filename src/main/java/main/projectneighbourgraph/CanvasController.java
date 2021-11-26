@@ -84,6 +84,7 @@ public class CanvasController {
      */
     private void createFrame(){
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setStroke(Color.BLACK);
         double canvasHeight = canvas.getHeight();
         double canvasWidth = canvas.getWidth();
         //horizontal arrow
@@ -114,27 +115,13 @@ public class CanvasController {
             double yToDraw = reMapVar(node.getUnityPos(), 0,1,canvas.getHeight()+frameMargin,frameMargin);
             node.setxPos(xToDraw);
             node.setyPos(yToDraw);
-            drawX(xToDraw, yToDraw, size, gc);
+            drawX(xToDraw, yToDraw, size, gc, node.getNodeColor());
         }
 
         for(Edge edge : edges){
             drawEdge(edge, gc);
         }
 
-        /*
-        for(Node node : nodeArrayList){
-
-            double xToDraw = reMapVar(node.getUnitxPos(), 0,1,frameMargin,canvas.getWidth()+frameMargin);
-            double yToDraw = reMapVar(node.getUnityPos(), 0,1,canvas.getHeight()+frameMargin,frameMargin);
-            node.setxPos(xToDraw);
-            node.setyPos(yToDraw);
-            drawX(xToDraw, yToDraw, size, gc);
-        }
-
-        for(Edge edge : edgeArrayList){
-            drawEdge(edge, gc);
-        }
-        */
     }
 
     public void changeMouseMode(int numberMode){
@@ -163,25 +150,15 @@ public class CanvasController {
         if(posIsInFrame(xClicked, yClicked, frameMargin)){
             double xSetPos = reMapVar(xClicked-frameMargin,0,canvas.getWidth(),0,1);
             double ySetPos = reMapVar(yClicked-frameMargin,canvas.getHeight(),0,0,1);
-            drawX(xClicked, yClicked,size, gc);
-            //nodeArrayList.add(new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++));
             Color color = graphData.getColorToUse();
+
+            drawX(xClicked, yClicked,size, gc, color);
+            //nodeArrayList.add(new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++));
             Node newNode = new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++, color);
             graphData.addNode(newNode);
             this.MC.refresh(new ActionEvent());
             //System.out.println("New node array :\n"+nodeArrayList);
 
-            //to comment/remove when not needed anymore
-            //TODO : rewrite if necessary with the new graph system
-            /*
-            if(pointCounter%2 == 0){
-                System.out.println("test draw of Edge");
-                int nbNode = nodeArrayList.size();
-                Edge newEdge = new Edge(nodeArrayList.get(nbNode-2), nodeArrayList.get(nbNode-1));
-                edgeArrayList.add(newEdge);
-                drawEdge(newEdge, gc);
-            }
-            */
 
 
 
@@ -216,7 +193,7 @@ public class CanvasController {
                 double xSetPos = reMapVar(x-frameMargin,0,canvas.getWidth(),0,1);
                 double ySetPos = reMapVar(y-frameMargin,canvas.getHeight(),0,0,1);
                 if(x <= xClicked+this.radiusBrush & x > xClicked-this.radiusBrush & y <= yClicked+this.radiusBrush & y > yClicked-this.radiusBrush) {
-                    drawX(x, y, size, gc);
+                    drawX(x, y, size, gc, graphData.getColorToUse());
                     Node newNode = new Node(x, y,xSetPos,ySetPos, pointCounter++, graphData.getColorToUse());
                     graphData.addNode(newNode);
                 }
@@ -252,7 +229,7 @@ public class CanvasController {
                 double xSetPos = reMapVar(x-frameMargin,0,canvas.getWidth(),0,1);
                 double ySetPos = reMapVar(y-frameMargin,canvas.getHeight(),0,0,1);
                 if(x <= xClicked+this.radiusBrush & x > xClicked-this.radiusBrush & y <= yClicked+this.radiusBrush & y > yClicked-this.radiusBrush) {
-                    drawX(x, y, size, gc);
+                    drawX(x, y, size, gc, graphData.getColorToUse());
                     Node newNode = new Node(x, y,xSetPos,ySetPos, pointCounter++, graphData.getColorToUse());
                     graphData.addNode(newNode);
                 }
@@ -288,10 +265,8 @@ public class CanvasController {
      * @param size size of the point to draw
      * @param gc GraphicsContext to draw to
      */
-    private void drawX(double centerX, double centerY, double size, GraphicsContext gc){
+    private void drawX(double centerX, double centerY, double size, GraphicsContext gc, Color color){
 
-        Color color = graphData.getColorToUse();
-        System.out.println(color);
         if(color == null) color = Color.BLACK;
 
         gc.setStroke(color);
@@ -325,7 +300,6 @@ public class CanvasController {
 
     /**
      * Draw a line between the two points, using their canvas position.
-     * Will store the line in an array
      *
      * @param point1 the first node
      * @param point2 the second node
@@ -333,8 +307,16 @@ public class CanvasController {
      */
     public void drawLineBetweenTwoPoint(Node point1, Node point2, GraphicsContext gc){
 
-        Color point1Color = point1.getNodeColor();
-        Color point2Color = point2.getNodeColor();
+        Color point1Color;
+        Color point2Color;
+        if(point1.getUnitxPos() <= point2.getUnitxPos()){
+            point1Color = point1.getNodeColor();
+            point2Color = point2.getNodeColor();
+        }else{
+            point1Color = point2.getNodeColor();
+            point2Color = point1.getNodeColor();
+        }
+
         if(point1Color == null) point1Color = Color.BLACK;
         if(point2Color == null) point2Color = Color.BLACK;
 
