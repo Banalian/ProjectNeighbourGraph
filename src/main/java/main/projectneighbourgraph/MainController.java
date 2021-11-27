@@ -118,10 +118,12 @@ public class MainController {
         }
     }
 
-    public void euclidianDistance(ActionEvent actionEvent) {
+    public void euclideanDistance(ActionEvent actionEvent) {
+        setStrategy(new egraphEuclideanStrategy());
     }
 
-    public void sineDistance(ActionEvent actionEvent) {
+    public void cosineDistance(ActionEvent actionEvent) {
+        setStrategy(new egraphCosineStrategy());
     }
 
     /**
