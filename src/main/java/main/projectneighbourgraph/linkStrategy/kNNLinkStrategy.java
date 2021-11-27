@@ -19,14 +19,19 @@ public class kNNLinkStrategy implements LinkStrategy {
      * Uses the kNN algorithm to make a list of edges corresponding to the k(arg) nearest neighbours
      *
      * @param nodeList the list of nodes to link
-     * @param arg      the number of nearest neighbours to choose
+     * @param arg Array of argument, here only containing the number of nearest neighbours to choose
+     * @param distanceStrategy the distance strategy to use
      */
-    public ArrayList<Edge> link(ArrayList<Node> nodeList, int arg, DistanceStrategy distanceStrategy) {
+    public ArrayList<Edge> link(ArrayList<Node> nodeList, int[] arg, DistanceStrategy distanceStrategy) {
         {
+            //check if there is one and only one argument
+            if (arg.length != 1) {
+                throw new IllegalArgumentException("kNNLinkStrategy only takes one argument");
+            }
             //check if the argument is valid
-            if (arg < 1)
+            if (arg[0] < 1)
                 throw new IllegalArgumentException("Error : argument is too low, must be at least one");
-            if (arg > nodeList.size()) {
+            if (arg[0] > nodeList.size()) {
                 //commented because it's not a problem, better to just warn the user
                 //throw new IllegalArgumentException("Error : argument is too high, must be less than the numbers of nodes");
                 System.out.println("Warning : argument is too high, must be less than the numbers of nodes\n" +
@@ -58,7 +63,7 @@ public class kNNLinkStrategy implements LinkStrategy {
                 NearestNode.SortDistance(nearestNodes);
 
                 //keep the k nearest neighbours to create edges
-                for (int k = 1; k <= arg; k++) {
+                for (int k = 1; k <= arg[0]; k++) {
                     if (k >= nodeList.size()) {
                         break;
                     }

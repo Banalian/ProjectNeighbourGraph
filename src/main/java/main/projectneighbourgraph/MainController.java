@@ -60,7 +60,7 @@ public class MainController {
      * @param nodeArrayList the arraylist of nodes
      * @param arg the argument used by the strategy (like for exemple the number of neighbours for kNN)
      */
-    void executeLinkStrategy(ArrayList<Node> nodeArrayList, int arg){
+    void executeLinkStrategy(ArrayList<Node> nodeArrayList, int[] arg){
         if(distanceStrategy == null){
             System.out.println("No distance strategy selected, please select one");
         }else{
@@ -120,8 +120,9 @@ public class MainController {
      */
     public void refresh(ActionEvent actionEvent) {
         statsTableController.reDraw();
+        int[] arg = {2}; //TODO : change this with a correct argument system
         if(linkStrategy!= null && distanceStrategy != null) {
-            executeLinkStrategy(graphData.getNodeArrayList(), 1);
+            executeLinkStrategy(graphData.getNodeArrayList(), arg);
         }
 
         if(linkStrategy == null) {

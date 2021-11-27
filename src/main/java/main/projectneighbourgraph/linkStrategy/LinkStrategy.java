@@ -6,8 +6,17 @@ import main.projectneighbourgraph.graphdata.Node;
 
 import java.util.ArrayList;
 
+/**
+ * Strategy interface to link nodes in a graph.
+ */
 public interface LinkStrategy {
 
-    ArrayList<Edge> link(ArrayList<Node> nodeList, int arg, DistanceStrategy distanceStrategy) ;//for kNN and egraph algorithms
+    /**
+     * Links nodes in a graph.
+     * @param nodeList list of nodes to link
+     * @param arg Array of arguments to use in the link strategy
+     * @param distanceStrategy distance strategy to use
+     */
+    ArrayList<Edge> link(ArrayList<Node> nodeList, int[] arg, DistanceStrategy distanceStrategy) ;//for kNN and egraph algorithms
 
 }

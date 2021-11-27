@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class egraphLinkStrategy implements LinkStrategy {
 
-    public ArrayList<Edge> link(ArrayList<Node> nodeList, int arg, DistanceStrategy distanceStrategy) {
+    public ArrayList<Edge> link(ArrayList<Node> nodeList, int[] arg, DistanceStrategy distanceStrategy) {
         //TODO : write the egraph alogrithm
         return null;
     }
