@@ -6,6 +6,18 @@ import main.projectneighbourgraph.graphdata.Node;
 import java.util.ArrayList;
 
 public interface DistanceStrategy {
-    int dist(Node a, Node b);
+
+    double distBetweenTwoNode(Node a, Node b);
+
+    double distBetweenNodeAndCoord(Node a, double x, double y);
+
+    /**
+     * Creates a square matrix telling the distance between two nodes
+     *
+     * @param nodeArrayList the list of Nodes to make the matrix from
+     * @return a square matrix of dimension 2 (dim2 array) and nodeNb size filled with the distances between two nodes A and B
+     */
+    double[][] getDistanceMatrix(ArrayList<Node> nodeArrayList);
+
 }
 

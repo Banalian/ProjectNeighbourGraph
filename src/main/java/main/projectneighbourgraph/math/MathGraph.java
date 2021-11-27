@@ -30,39 +30,6 @@ public class MathGraph {
 
     }
 
-    /**
-     * Get the absolute length between two points using Pythagoras formula
-     *
-     * @param point1 the first point to check
-     * @param point2 the second one to check
-     * @return the length that separates the two points
-     */
-    public static double lengthBetweenTwoPoints(Node point1, Node point2) {
-
-        double xDifference = Math.abs(point1.getUnitxPos() - point2.getUnitxPos());
-        double yDifference = Math.abs(point1.getUnityPos() - point2.getUnityPos());
-
-        //Sqrt(a²+b²)=c
-        return Math.sqrt((xDifference * xDifference) + (yDifference * yDifference));
-    }
-
-
-    /**
-     * Get the absolute length between a point and coordinates using Pythagoras formula
-     * Note : please give the unit coords, not the drawing ones
-     *
-     * @param point  the point to check
-     * @param xCoord the x coordinate of the coordinates to check
-     * @param yCoord the y coordinate of the coordinates to check
-     * @return the length that separates the point and the coordinate
-     */
-    public static double lengthBetweenPointAndCoord(Node point, double xCoord, double yCoord) {
-        double xDifference = Math.abs(point.getUnitxPos() - xCoord);
-        double yDifference = Math.abs(point.getUnityPos() - yCoord);
-
-        //Sqrt(a²+b²)=c
-        return Math.sqrt((xDifference * xDifference) + (yDifference * yDifference));
-    }
 
     /**
      * Creates a square matrix telling if two nodes are linked with an edge or not
@@ -106,45 +73,6 @@ public class MathGraph {
         }
 
         return adjacentMatrix;
-    }
-
-
-    /**
-     * Creates a square matrix telling the distance between two nodes
-     *
-     * @param nodeArrayList the list of Nodes to make the matrix from
-     * @return a square matrix of dimension 2 (dim2 array) and nodeNb size filled with the distances between two nodes A and B
-     */
-    public static double[][] getDistanceMatrix(ArrayList<Node> nodeArrayList){
-        int nodeNb = nodeArrayList.size();
-        int curNode1 = 0;
-        int curNode2;
-        double[][] distanceMatrix = new double[nodeNb][nodeNb];
-
-        // we go through the list for the first node
-        for (Node node1: nodeArrayList) {
-            curNode2 = 0;
-
-            //for each node to make a duo node1 and node2
-            for(Node node2 : nodeArrayList){
-
-                //if it's two different nodes
-                if((node1!=node2)){
-                    //get the length between them and add it to the matrix
-                    double length = lengthBetweenTwoPoints(node1,node2);
-                    distanceMatrix[curNode1][curNode2] = length;
-                    distanceMatrix[curNode2][curNode1] = length;
-                }else{
-                    //distance is 0 since it's itself
-                    distanceMatrix[curNode1][curNode2] = 0;
-                }
-                curNode2++;
-            }
-
-            curNode1++;
-        }
-
-        return distanceMatrix;
     }
 
 

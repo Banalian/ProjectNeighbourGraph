@@ -33,12 +33,19 @@ public class MainController {
      */
     private Graph graphData;
 
-    public MainController(){}
-
     /**
      * Strategy used to create the graph's edges
      */
     private LinkStrategy linkStrategy;
+
+    /**
+     * Strategy used to create the graph's edges
+     */
+    private DistanceStrategy distanceStrategy;
+
+
+    public MainController(){}
+
 
     /**
      * set the strategy for the link creation
@@ -54,15 +61,15 @@ public class MainController {
      * @param arg the argument used by the strategy (like for exemple the number of neighbours for kNN)
      */
     void executeLinkStrategy(ArrayList<Node> nodeArrayList, int arg){
-        ArrayList<Edge> result = linkStrategy.link(nodeArrayList, arg);
-        graphData.setEdgeArrayList(result);
-        canvasController.reDraw();
+        if(distanceStrategy == null){
+            System.out.println("No distance strategy selected, please select one");
+        }else{
+            ArrayList<Edge> result = linkStrategy.link(nodeArrayList, arg, distanceStrategy);
+            graphData.setEdgeArrayList(result);
+            canvasController.reDraw();
+        }
     }
 
-    /**
-     * Strategy used to create the graph's edges
-     */
-    private DistanceStrategy distanceStrategy;
 
     /**
      * set the strategy for the link creation
@@ -113,17 +120,24 @@ public class MainController {
      */
     public void refresh(ActionEvent actionEvent) {
         statsTableController.reDraw();
-        if(linkStrategy!= null){
-            executeDistanceStrategy(graphData.getNodeArrayList(), 2);
+        if(linkStrategy!= null && distanceStrategy != null) {
+            executeLinkStrategy(graphData.getNodeArrayList(), 2);
+        }
+
+        if(linkStrategy == null) {
+            System.out.println("linkStrategy is missing, can't refresh");
+        }
+        if(distanceStrategy == null) {
+            System.out.println("distanceStrategy is missing, can't refresh");
         }
     }
 
     public void euclideanDistance(ActionEvent actionEvent) {
-        setStrategy(new egraphEuclideanStrategy());
+        setStrategy(new EuclideanStrategy());
     }
 
     public void cosineDistance(ActionEvent actionEvent) {
-        setStrategy(new egraphCosineStrategy());
+        setStrategy(new CosineStrategy());
     }
 
     /**

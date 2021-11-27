@@ -4,84 +4,88 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import main.projectneighbourgraph.distanceStrategy.DistanceStrategy;
 import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Node;
 import main.projectneighbourgraph.math.MathGraph;
 
 /**
  * Class that implements the k Nearest Neighbours algorithm using the LinkStrategy interface.
+ * Also has a DistanceStrategy that needs to be set before using the algorithm.
  */
 public class kNNLinkStrategy implements LinkStrategy {
 
     /**
      * Uses the kNN algorithm to make a list of edges corresponding to the k(arg) nearest neighbours
+     *
      * @param nodeList the list of nodes to link
-     * @param arg the number of nearest neighbours to choose
+     * @param arg      the number of nearest neighbours to choose
      */
-    public ArrayList<Edge> link(ArrayList<Node> nodeList, int arg)
-    {
-        //check if the argument is valid
-        if(arg < 1)
-            throw new IllegalArgumentException("Error : argument is too low, must be at least one");
-        if(arg > nodeList.size()){
-            //commented because it's not a problem, better to just warn the user
-            //throw new IllegalArgumentException("Error : argument is too high, must be less than the numbers of nodes");
-            System.out.println("Warning : argument is too high, must be less than the numbers of nodes\n"+
-                    "No edges added");
-            return new ArrayList<>();
-        }
-
-
-
-
-        //create the distance matrix and initialize the variables
-        double[][] distanceMatrix = MathGraph.getDistanceMatrix(nodeList);
-        double[] distanceToINode;
-        ArrayList<Edge> edgeArrayList = new ArrayList<>();
-        int nodeNb = nodeList.size();
-        boolean addEdge = true;
-
-        //for each node, sort the distance to the other node
-        for(int i = 0; i < nodeNb; i++){
-            distanceToINode = distanceMatrix[i];
-
-            NearestNode[] nearestNodes = new NearestNode[nodeNb];
-            for(int j = 0; j < nodeNb; j++){
-                nearestNodes[j] = new NearestNode(j, distanceToINode[j]);
+    public ArrayList<Edge> link(ArrayList<Node> nodeList, int arg, DistanceStrategy distanceStrategy) {
+        {
+            //check if the argument is valid
+            if (arg < 1)
+                throw new IllegalArgumentException("Error : argument is too low, must be at least one");
+            if (arg > nodeList.size()) {
+                //commented because it's not a problem, better to just warn the user
+                //throw new IllegalArgumentException("Error : argument is too high, must be less than the numbers of nodes");
+                System.out.println("Warning : argument is too high, must be less than the numbers of nodes\n" +
+                        "No edges added");
+                return new ArrayList<>();
+            }
+            if (distanceStrategy == null) {
+                throw new IllegalArgumentException("Error : distance strategy is null");
             }
 
-            //sort the array
-            NearestNode.SortDistance(nearestNodes);
 
-            //keep the k nearest neighbours to create edges
-            for(int k = 1; k <= arg; k++){
-                if(k >= nodeList.size()){
-                    break;
+            //create the distance matrix and initialize the variables
+            double[][] distanceMatrix = distanceStrategy.getDistanceMatrix(nodeList);
+            double[] distanceToINode;
+            ArrayList<Edge> edgeArrayList = new ArrayList<>();
+            int nodeNb = nodeList.size();
+            boolean addEdge = true;
+
+            //for each node, sort the distance to the other node
+            for (int i = 0; i < nodeNb; i++) {
+                distanceToINode = distanceMatrix[i];
+
+                NearestNode[] nearestNodes = new NearestNode[nodeNb];
+                for (int j = 0; j < nodeNb; j++) {
+                    nearestNodes[j] = new NearestNode(j, distanceToINode[j]);
                 }
-                //we check if the possible edge already exists/was already created
-                for(Edge edge : edgeArrayList){
 
-                    if( (edge.getNode1() == nodeList.get(nearestNodes[k].Position)) &&
-                        (edge.getNode2() == nodeList.get(i)))
-                    {
-                        //the edge already exists, so we don't add it
-                        addEdge = false;
+                //sort the array
+                NearestNode.SortDistance(nearestNodes);
+
+                //keep the k nearest neighbours to create edges
+                for (int k = 1; k <= arg; k++) {
+                    if (k >= nodeList.size()) {
                         break;
                     }
-                }
-                if(addEdge){
-                    edgeArrayList.add(new Edge(nodeList.get(i), nodeList.get(nearestNodes[k].Position)));
-                }else{
-                    addEdge = true;
+                    //we check if the possible edge already exists/was already created
+                    for (Edge edge : edgeArrayList) {
+
+                        if ((edge.getNode1() == nodeList.get(nearestNodes[k].Position)) &&
+                                (edge.getNode2() == nodeList.get(i))) {
+                            //the edge already exists, so we don't add it
+                            addEdge = false;
+                            break;
+                        }
+                    }
+                    if (addEdge) {
+                        edgeArrayList.add(new Edge(nodeList.get(i), nodeList.get(nearestNodes[k].Position)));
+                    } else {
+                        addEdge = true;
+                    }
+
                 }
 
             }
 
+            return edgeArrayList;
         }
 
-        return edgeArrayList;
     }
-
 }
 
 /**
@@ -109,10 +113,8 @@ class NearestNode
 /**
  * Comparator that compares the distance of 2 NearestNode
  */
-class DistanceSort implements Comparator<NearestNode>
-{
-    public int compare(NearestNode o1, NearestNode o2)
-    {
+class DistanceSort implements Comparator<NearestNode> {
+    public int compare(NearestNode o1, NearestNode o2) {
         return Double.compare(o1.Distance, o2.Distance);
     }
 }
