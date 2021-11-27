@@ -121,7 +121,7 @@ public class MainController {
     public void refresh(ActionEvent actionEvent) {
         statsTableController.reDraw();
         if(linkStrategy!= null && distanceStrategy != null) {
-            executeLinkStrategy(graphData.getNodeArrayList(), 2);
+            executeLinkStrategy(graphData.getNodeArrayList(), 1);
         }
 
         if(linkStrategy == null) {

@@ -1,8 +1,6 @@
 package main.projectneighbourgraph.distanceStrategy;
 
-import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Node;
-import main.projectneighbourgraph.linkStrategy.LinkStrategy;
 
 import java.util.ArrayList;
 
@@ -15,7 +13,7 @@ public class EuclideanStrategy implements DistanceStrategy {
      * @param b the second one to check
      * @return the length that separates the two nodes
      */
-    public double distBetweenTwoNode(Node a, Node b){
+    public double distBetweenTwoNodes(Node a, Node b){
         double xDifference = Math.abs(a.getUnitxPos() - b.getUnitxPos());
         double yDifference = Math.abs(a.getUnityPos() - b.getUnityPos());
 
@@ -65,7 +63,7 @@ public class EuclideanStrategy implements DistanceStrategy {
                 //if it's two different nodes
                 if((node1!=node2)){
                     //get the length between them and add it to the matrix
-                    double length = distBetweenTwoNode(node1,node2);
+                    double length = distBetweenTwoNodes(node1,node2);
                     distanceMatrix[curNode1][curNode2] = length;
                     distanceMatrix[curNode2][curNode1] = length;
                 }else{

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface DistanceStrategy {
 
-    double distBetweenTwoNode(Node a, Node b);
+    double distBetweenTwoNodes(Node a, Node b);
 
     double distBetweenNodeAndCoord(Node a, double x, double y);
 
