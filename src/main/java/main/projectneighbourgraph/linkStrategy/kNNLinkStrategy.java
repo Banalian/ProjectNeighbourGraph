@@ -1,4 +1,4 @@
-package main.projectneighbourgraph.strategy;
+package main.projectneighbourgraph.linkStrategy;
 
 import java.util.ArrayList;
 import java.util.Arrays;

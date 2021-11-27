@@ -1,4 +1,4 @@
-package main.projectneighbourgraph.strategy;
+package main.projectneighbourgraph.linkStrategy;
 
 import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Node;

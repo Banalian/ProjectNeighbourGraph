@@ -3,11 +3,11 @@ package main.projectneighbourgraph;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Graph;
 import main.projectneighbourgraph.graphdata.Node;
-import main.projectneighbourgraph.strategy.*;
+import main.projectneighbourgraph.linkStrategy.*;
+import main.projectneighbourgraph.distanceStrategy.*;
 
 import java.util.ArrayList;
 
@@ -38,14 +38,14 @@ public class MainController {
     /**
      * Strategy used to create the graph's edges
      */
-    private LinkStrategy strategy;
+    private LinkStrategy linkStrategy;
 
     /**
      * set the strategy for the link creation
-     * @param strategy the new strategy to use
+     * @param linkStrategy the new strategy to use
      */
-    void setStrategy(LinkStrategy strategy) {
-        this.strategy = strategy;
+    void setStrategy(LinkStrategy linkStrategy) {
+        this.linkStrategy = linkStrategy;
     }
 
     /**
@@ -53,10 +53,31 @@ public class MainController {
      * @param nodeArrayList the arraylist of nodes
      * @param arg the argument used by the strategy (like for exemple the number of neighbours for kNN)
      */
-    void executeStrategy(ArrayList<Node> nodeArrayList, int arg){
-        ArrayList<Edge> result = strategy.link(nodeArrayList, arg);
+    void executeLinkStrategy(ArrayList<Node> nodeArrayList, int arg){
+        ArrayList<Edge> result = linkStrategy.link(nodeArrayList, arg);
         graphData.setEdgeArrayList(result);
         canvasController.reDraw();
+    }
+
+    /**
+     * Strategy used to create the graph's edges
+     */
+    private DistanceStrategy distanceStrategy;
+
+    /**
+     * set the strategy for the link creation
+     * @param distanceStrategy the new strategy to use
+     */
+    void setStrategy(DistanceStrategy distanceStrategy) {
+        this.distanceStrategy = distanceStrategy;
+    }
+
+    /**
+     * Executes the current strategy on the graph's node list.
+     * @param nodeArrayList the arraylist of nodes
+     * @param arg the argument used by the strategy (like for exemple the number of neighbours for kNN)
+     */
+    void executeDistanceStrategy(ArrayList<Node> nodeArrayList, int arg){
     }
 
     public StatsTableController getStatsTableController() {
@@ -92,8 +113,8 @@ public class MainController {
      */
     public void refresh(ActionEvent actionEvent) {
         statsTableController.reDraw();
-        if(strategy!= null){
-            executeStrategy(graphData.getNodeArrayList(), 2);
+        if(linkStrategy!= null){
+            executeDistanceStrategy(graphData.getNodeArrayList(), 2);
         }
     }
 
