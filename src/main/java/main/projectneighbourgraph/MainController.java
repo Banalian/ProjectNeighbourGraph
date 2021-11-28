@@ -16,25 +16,43 @@ import java.util.ArrayList;
  * Main controller of the software
  */
 public class MainController {
-    @FXML private Label welcomeText;
+    @FXML
+    private Label welcomeText;
 
-    @FXML private Button refreshButton;
-    @FXML private Button ButtonClick;
-    @FXML private Button ButtonBrush;
-    @FXML private TextField radiusBrush;
-    @FXML private TextField pointsPerClick;
-    @FXML private ColorPicker colorPick;
+    @FXML
+    private Button refreshButton;
+    @FXML
+    private Button ButtonClick;
+    @FXML
+    private Button ButtonBrush;
+    @FXML
+    private TextField radiusBrush;
+    @FXML
+    private TextField pointsPerClick;
+    @FXML
+    private ColorPicker colorPick;
 
-    @FXML private CanvasController canvasController;
-    @FXML private StatsTableController statsTableController;
+    @FXML
+    private CanvasController canvasController;
+    @FXML
+    private StatsTableController statsTableController;
 
-    @FXML private MenuItem kNNSelection;
-    @FXML private MenuItem egraphSelection;
-    @FXML private MenuItem ggSelection;
-    @FXML private MenuItem relativeSelection;
+    @FXML
+    private MenuItem aboutMenuItem;
 
-    @FXML private MenuItem euclideanSelection;
-    @FXML private MenuItem sineSelection;
+    @FXML
+    private MenuItem kNNSelection;
+    @FXML
+    private MenuItem egraphSelection;
+    @FXML
+    private MenuItem ggSelection;
+    @FXML
+    private MenuItem relativeSelection;
+
+    @FXML
+    private MenuItem euclideanSelection;
+    @FXML
+    private MenuItem sineSelection;
 
 
     /**
@@ -53,11 +71,13 @@ public class MainController {
     private DistanceStrategy distanceStrategy;
 
 
-    public MainController(){}
+    public MainController() {
+    }
 
 
     /**
      * set the strategy for the link creation
+     *
      * @param linkStrategy the new strategy to use
      */
     void setStrategy(LinkStrategy linkStrategy) {
@@ -66,13 +86,14 @@ public class MainController {
 
     /**
      * Executes the current strategy on the graph's node list.
+     *
      * @param nodeArrayList the arraylist of nodes
-     * @param arg the argument used by the strategy (like for exemple the number of neighbours for kNN)
+     * @param arg           the argument used by the strategy (like for exemple the number of neighbours for kNN)
      */
-    void executeLinkStrategy(ArrayList<Node> nodeArrayList, int[] arg){
-        if(distanceStrategy == null){
+    void executeLinkStrategy(ArrayList<Node> nodeArrayList, int[] arg) {
+        if (distanceStrategy == null) {
             System.out.println("No distance strategy selected, please select one");
-        }else{
+        } else {
             ArrayList<Edge> result = linkStrategy.link(nodeArrayList, arg, distanceStrategy);
             graphData.setEdgeArrayList(result);
             canvasController.reDraw();
@@ -82,6 +103,7 @@ public class MainController {
 
     /**
      * set the strategy for the link creation
+     *
      * @param distanceStrategy the new strategy to use
      */
     void setStrategy(DistanceStrategy distanceStrategy) {
@@ -90,32 +112,34 @@ public class MainController {
 
     /**
      * Executes the current strategy on the graph's node list.
+     *
      * @param nodeArrayList the arraylist of nodes
-     * @param arg the argument used by the strategy (like for exemple the number of neighbours for kNN)
+     * @param arg           the argument used by the strategy (like for exemple the number of neighbours for kNN)
      */
-    void executeDistanceStrategy(ArrayList<Node> nodeArrayList, int arg){
+    void executeDistanceStrategy(ArrayList<Node> nodeArrayList, int arg) {
     }
 
     public StatsTableController getStatsTableController() {
         return statsTableController;
     }
+
     public CanvasController getCanvasController() {
         return canvasController;
     }
 
-    public void onActionButtonClick(ActionEvent actionevent){
+    public void onActionButtonClick(ActionEvent actionevent) {
         canvasController.changeMouseMode(1);
     }
 
-    public void onActionButtonBrush(ActionEvent actionevent){
+    public void onActionButtonBrush(ActionEvent actionevent) {
         canvasController.changeMouseMode(2);
     }
 
-    public void getPointsPerClick(ActionEvent actionevent){
+    public void getPointsPerClick(ActionEvent actionevent) {
         canvasController.setPointsPerClick(Integer.parseInt(pointsPerClick.getCharacters().toString()));
     }
 
-    public void getRadiusBrush(ActionEvent actionevent){
+    public void getRadiusBrush(ActionEvent actionevent) {
         canvasController.setRadiusBrush(Double.parseDouble(radiusBrush.getCharacters().toString()));
     }
 
@@ -125,19 +149,20 @@ public class MainController {
 
     /**
      * refresh the links of the node of the graph, using the current strategy
+     *
      * @param actionEvent the event that triggered this method
      */
     public void refresh(ActionEvent actionEvent) {
         statsTableController.reDraw();
         int[] arg = {2}; //TODO : change this with a correct argument system
-        if(linkStrategy!= null && distanceStrategy != null) {
+        if (linkStrategy != null && distanceStrategy != null) {
             executeLinkStrategy(graphData.getNodeArrayList(), arg);
         }
 
-        if(linkStrategy == null) {
+        if (linkStrategy == null) {
             System.out.println("linkStrategy is missing, can't refresh");
         }
-        if(distanceStrategy == null) {
+        if (distanceStrategy == null) {
             System.out.println("distanceStrategy is missing, can't refresh");
         }
     }
@@ -154,6 +179,7 @@ public class MainController {
 
     /**
      * Action to set the new strategy to the kNN strategy
+     *
      * @param actionEvent the event that triggered this method
      */
     public void kNNLink(ActionEvent actionEvent) {
@@ -178,13 +204,14 @@ public class MainController {
 
     /**
      * Sets the labels of the menu items for the link strategy
+     *
      * @param linkSelectionText the menu item to set to selected
      */
     public void setLinkSelectionText(String linkSelectionText) {
-       kNNSelection.setText("kNN");
-       egraphSelection.setText("ε-graph");
-       ggSelection.setText("GG Gabriel");
-       relativeSelection.setText("Relative neighbors");
+        kNNSelection.setText("kNN");
+        egraphSelection.setText("ε-graph");
+        ggSelection.setText("GG Gabriel");
+        relativeSelection.setText("Relative neighbors");
 
         switch (linkSelectionText) {
             case "kNN" -> kNNSelection.setText("kNN (selected)");
@@ -196,6 +223,7 @@ public class MainController {
 
     /**
      * Sets the labels of the menu items for the distance strategy
+     *
      * @param distanceSelectionText the menu item to set to selected
      */
     public void setDistanceSelectionText(String distanceSelectionText) {
@@ -209,6 +237,7 @@ public class MainController {
 
     /**
      * Removes all nodes and edges from the graph. Clears the canvas and the stats table.
+     *
      * @param actionEvent the event that triggered this method
      */
     public void clearAll(ActionEvent actionEvent) {
@@ -220,4 +249,19 @@ public class MainController {
     public void chooseColor(ActionEvent actionEvent) {
         graphData.setColorToUse(colorPick.getValue());
     }
+
+    public void aboutMenuAction(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setHeaderText("About");
+        alert.setContentText("This is a simple application that allows you to create a graph by adding nodes on a canvas " +
+                "and then draw the graph using different strategies to link the nodes between them.\n" +
+                "Made by: \n" +
+                "  - Lilian Pouvreau\n" +
+                "  - Corentin Esnault\n" +
+                "  - Robin Lejeune\n" +
+                "  - Mouna Kanouni\n");
+        alert.showAndWait();
+    }
+
 }
