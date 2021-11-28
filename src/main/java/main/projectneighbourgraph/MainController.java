@@ -28,6 +28,15 @@ public class MainController {
     @FXML private CanvasController canvasController;
     @FXML private StatsTableController statsTableController;
 
+    @FXML private MenuItem kNNSelection;
+    @FXML private MenuItem egraphSelection;
+    @FXML private MenuItem ggSelection;
+    @FXML private MenuItem relativeSelection;
+
+    @FXML private MenuItem euclideanSelection;
+    @FXML private MenuItem sineSelection;
+
+
     /**
      * reference to the graph and its data (nodes and edges)
      */
@@ -135,10 +144,12 @@ public class MainController {
 
     public void euclideanDistance(ActionEvent actionEvent) {
         setStrategy(new EuclideanStrategy());
+        setDistanceSelectionText("Euclidean");
     }
 
     public void cosineDistance(ActionEvent actionEvent) {
         setStrategy(new CosineStrategy());
+        setDistanceSelectionText("Sinus");
     }
 
     /**
@@ -147,18 +158,53 @@ public class MainController {
      */
     public void kNNLink(ActionEvent actionEvent) {
         setStrategy(new kNNLinkStrategy());
+        setLinkSelectionText("kNN");
     }
 
     public void egraphLink(ActionEvent actionEvent) {
         setStrategy(new egraphLinkStrategy());
+        setLinkSelectionText("e-graph");
     }
 
     public void ggLink(ActionEvent actionEvent) {
         setStrategy(new ggLinkStrategy());
+        setLinkSelectionText("GG Gabriel");
     }
 
     public void relativeLink(ActionEvent actionEvent) {
         setStrategy(new relativeLinkStrategy());
+        setLinkSelectionText("Relative neighbors");
+    }
+
+    /**
+     * Sets the labels of the menu items for the link strategy
+     * @param linkSelectionText the menu item to set to selected
+     */
+    public void setLinkSelectionText(String linkSelectionText) {
+       kNNSelection.setText("kNN");
+       egraphSelection.setText("ε-graph");
+       ggSelection.setText("GG Gabriel");
+       relativeSelection.setText("Relative neighbors");
+
+        switch (linkSelectionText) {
+            case "kNN" -> kNNSelection.setText("kNN (selected)");
+            case "e-graph" -> egraphSelection.setText("ε-graph (selected)");
+            case "GG Gabriel" -> ggSelection.setText("GG Gabriel (selected)");
+            case "Relative neighbors" -> relativeSelection.setText("Relative neighbors (selected)");
+        }
+    }
+
+    /**
+     * Sets the labels of the menu items for the distance strategy
+     * @param distanceSelectionText the menu item to set to selected
+     */
+    public void setDistanceSelectionText(String distanceSelectionText) {
+        euclideanSelection.setText("Euclidean");
+        sineSelection.setText("Sinus");
+        switch (distanceSelectionText) {
+            case "Euclidean" -> euclideanSelection.setText("Euclidean (selected)");
+            case "Sinus" -> sineSelection.setText("Sinus (selected)");
+        }
     }
 
     /**

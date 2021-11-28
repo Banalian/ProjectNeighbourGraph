@@ -103,7 +103,7 @@
                                                 <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
                                                 <MenuButton mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" popupSide="TOP" text="Distance">
                                                   <items>
-                                                    <MenuItem fx:id="euclidianSelection" mnemonicParsing="false" onAction="#euclideanDistance" text="Euclidian" />
+                                                    <MenuItem fx:id="euclideanSelection" mnemonicParsing="false" onAction="#euclideanDistance" text="Euclidean" />
                                                     <MenuItem fx:id="sineSelection" mnemonicParsing="false" onAction="#cosineDistance" text="Sinus" />
                                                   </items>
                                                 </MenuButton>
