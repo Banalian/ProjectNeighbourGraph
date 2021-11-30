@@ -54,6 +54,11 @@ public class MainController {
     @FXML
     private MenuItem sineSelection;
 
+    @FXML
+    private CheckBox autoRefreshCB;
+
+    boolean autoRefresh = false;
+
 
     /**
      * reference to the graph and its data (nodes and edges)
@@ -167,6 +172,20 @@ public class MainController {
         }
     }
 
+    public void autoRefresh(){
+        if(autoRefresh){
+            refresh(null);
+        }
+    }
+
+    /**
+     * Change the auto refresh mode
+     * @param actionEvent the event that triggered this method
+     */
+    public void changeAutoRefresh(ActionEvent actionEvent) {
+        autoRefresh = autoRefreshCB.isSelected();
+    }
+
     public void euclideanDistance(ActionEvent actionEvent) {
         setStrategy(new EuclideanStrategy());
         setDistanceSelectionText("Euclidean");
@@ -263,5 +282,6 @@ public class MainController {
                 "  - Mouna Kanouni\n");
         alert.showAndWait();
     }
+
 
 }

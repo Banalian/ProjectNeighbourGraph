@@ -149,7 +149,7 @@ public class CanvasController {
             drawX(xClicked, yClicked,size, gc, color);
             Node newNode = new Node(xClicked, yClicked,xSetPos,ySetPos, pointCounter++, color);
             graphData.addNode(newNode);
-            this.MC.refresh(new ActionEvent());
+            this.MC.autoRefresh();
             //System.out.println("New node array :\n"+nodeArrayList);
 
 
