@@ -43,11 +43,12 @@
                     <items>
                         <MenuItem mnemonicParsing="false" text="Preferences…" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Quit" />
+                        <MenuItem mnemonicParsing="false" onAction="#exitProgram" text="Quit" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
+                  <MenuItem mnemonicParsing="false" onAction="#explanationMenuAction" text="Explanation" />
                         <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#aboutMenuAction" text="About the app" />
                     </items>
                 </Menu>
@@ -76,7 +77,7 @@
                                                     <children>
                                                         <ButtonBar layoutX="9.0" layoutY="192.0" maxHeight="178.0" maxWidth="800.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="43.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="False">
                                                             <buttons>
-                                                <Button fx:id="refreshButton1" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" onAction="#clearAll" text="Clear All" />
+                                                <Button layoutX="30.0" layoutY="10.0" mnemonicParsing="false" onAction="#clearAll" text="Clear All" />
                                                 <CheckBox fx:id="autoRefreshCB" minWidth="28.0" mnemonicParsing="false" onAction="#changeAutoRefresh" prefHeight="28.0" text="AutoRefresh" />
                                                 <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" text="Refresh" />
                                                 <MenuButton mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" popupSide="TOP" text="Distance">

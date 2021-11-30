@@ -1,5 +1,6 @@
 package main.projectneighbourgraph;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -29,6 +30,10 @@ public class MainController {
     private TextField radiusBrush;
     @FXML
     private TextField pointsPerClick;
+
+    /**
+     * ColorPicker to choose a color for the nodes
+     */
     @FXML
     private ColorPicker colorPick;
 
@@ -54,9 +59,15 @@ public class MainController {
     @FXML
     private MenuItem sineSelection;
 
+    /**
+     * Checkbox to enable or disable the automatic refresh of the graph
+     */
     @FXML
     private CheckBox autoRefreshCB;
 
+    /**
+     * Boolean to check if the automatic refresh is enabled
+     */
     boolean autoRefresh = false;
 
 
@@ -82,7 +93,6 @@ public class MainController {
 
     /**
      * set the strategy for the link creation
-     *
      * @param linkStrategy the new strategy to use
      */
     void setStrategy(LinkStrategy linkStrategy) {
@@ -93,36 +103,36 @@ public class MainController {
      * Executes the current strategy on the graph's node list.
      *
      * @param nodeArrayList the arraylist of nodes
-     * @param arg           the argument used by the strategy (like for exemple the number of neighbours for kNN)
+     * @param arg the arguments used by the strategy (like for example the number of neighbours for kNN)
      */
     void executeLinkStrategy(ArrayList<Node> nodeArrayList, int[] arg) {
         if (distanceStrategy == null) {
             System.out.println("No distance strategy selected, please select one");
         } else {
-            ArrayList<Edge> result = linkStrategy.link(nodeArrayList, arg, distanceStrategy);
-            graphData.setEdgeArrayList(result);
-            canvasController.reDraw();
+            try {
+                ArrayList<Edge> result = linkStrategy.link(nodeArrayList, arg, distanceStrategy);
+                graphData.setEdgeArrayList(result);
+                canvasController.reDraw();
+            }catch (Exception e){
+                //show an alert box with the error message
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error : " + e.getMessage());
+                alert.showAndWait();
+            }
+
         }
     }
 
 
     /**
      * set the strategy for the link creation
-     *
      * @param distanceStrategy the new strategy to use
      */
     void setStrategy(DistanceStrategy distanceStrategy) {
         this.distanceStrategy = distanceStrategy;
     }
 
-    /**
-     * Executes the current strategy on the graph's node list.
-     *
-     * @param nodeArrayList the arraylist of nodes
-     * @param arg           the argument used by the strategy (like for exemple the number of neighbours for kNN)
-     */
-    void executeDistanceStrategy(ArrayList<Node> nodeArrayList, int arg) {
-    }
 
     public StatsTableController getStatsTableController() {
         return statsTableController;
@@ -153,8 +163,7 @@ public class MainController {
     }
 
     /**
-     * refresh the links of the node of the graph, using the current strategy
-     *
+     * Refresh the links of the node of the graph, using the current strategy
      * @param actionEvent the event that triggered this method
      */
     public void refresh(ActionEvent actionEvent) {
@@ -172,6 +181,9 @@ public class MainController {
         }
     }
 
+    /**
+     * refresh the canvas if the auto refresh is checked
+     */
     public void autoRefresh(){
         if(autoRefresh){
             refresh(null);
@@ -186,19 +198,26 @@ public class MainController {
         autoRefresh = autoRefreshCB.isSelected();
     }
 
+    /**
+     * Action to set the new distance strategy to the euclidean strategy
+     * @param actionEvent the event that triggered this method
+     */
     public void euclideanDistance(ActionEvent actionEvent) {
         setStrategy(new EuclideanStrategy());
         setDistanceSelectionText("Euclidean");
     }
 
+    /**
+     * Action to set the new distance strategy to the cosine strategy
+     * @param actionEvent the event that triggered this method
+     */
     public void cosineDistance(ActionEvent actionEvent) {
         setStrategy(new CosineStrategy());
         setDistanceSelectionText("Sinus");
     }
 
     /**
-     * Action to set the new strategy to the kNN strategy
-     *
+     * Action to set the new link strategy to the kNN strategy
      * @param actionEvent the event that triggered this method
      */
     public void kNNLink(ActionEvent actionEvent) {
@@ -211,6 +230,10 @@ public class MainController {
         setLinkSelectionText("e-graph");
     }
 
+    /**
+     * Action to set the new link strategy to the gg gabriel strategy
+     * @param actionEvent the event that triggered this method
+     */
     public void ggLink(ActionEvent actionEvent) {
         setStrategy(new ggLinkStrategy());
         setLinkSelectionText("GG Gabriel");
@@ -223,7 +246,6 @@ public class MainController {
 
     /**
      * Sets the labels of the menu items for the link strategy
-     *
      * @param linkSelectionText the menu item to set to selected
      */
     public void setLinkSelectionText(String linkSelectionText) {
@@ -242,7 +264,6 @@ public class MainController {
 
     /**
      * Sets the labels of the menu items for the distance strategy
-     *
      * @param distanceSelectionText the menu item to set to selected
      */
     public void setDistanceSelectionText(String distanceSelectionText) {
@@ -256,7 +277,6 @@ public class MainController {
 
     /**
      * Removes all nodes and edges from the graph. Clears the canvas and the stats table.
-     *
      * @param actionEvent the event that triggered this method
      */
     public void clearAll(ActionEvent actionEvent) {
@@ -265,10 +285,18 @@ public class MainController {
         canvasController.reDraw();
     }
 
+    /**
+     * Choose a new color to use for the next nodes
+     * @param actionEvent the event that triggered this method
+     */
     public void chooseColor(ActionEvent actionEvent) {
         graphData.setColorToUse(colorPick.getValue());
     }
 
+    /**
+     * Opens an alert box with credits and information about the program
+     * @param actionEvent the event that triggered this method
+     */
     public void aboutMenuAction(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About");
@@ -281,6 +309,35 @@ public class MainController {
                 "  - Robin Lejeune\n" +
                 "  - Mouna Kanouni\n");
         alert.showAndWait();
+    }
+
+    /**
+     * Open an alert box to explain the use of the different strategies/algorithms
+     * @param actionEvent the event that triggered this method
+     */
+    public void explanationMenuAction(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Algorithm explanation");
+        alert.setHeaderText("Algorithm explanation");
+        alert.setContentText("The currently implemented strategies/algorithms are:\n" +
+                "Distance Strategies :\n" +
+                "  - Euclidean: the distance between two nodes is the euclidean distance\n" +
+                "  - Sinus: the distance between two nodes is the sinus of the angle between the two nodes\n" +
+                "Link Strategies :\n" +
+                "  - kNN: we link each nodes to its k-nearest neighbors (for example its 2 closest for)\n" +
+                "  - e-graph: EXPLANATION NEEDED\n" +
+                "  - GG Gabriel: for each node, you check all the other node and create a cicle between them, and if no nodes are within that circle, we link the nodes.\n" +
+                "  - Relative neighbors: EXPLANATION NEEDED\n");
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Exits the application
+     * @param actionEvent the event that triggered this method
+     */
+    public void exitProgram(ActionEvent actionEvent) {
+        Platform.exit();
     }
 
 

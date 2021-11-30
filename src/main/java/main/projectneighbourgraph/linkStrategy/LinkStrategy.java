@@ -17,6 +17,6 @@ public interface LinkStrategy {
      * @param arg Array of arguments to use in the link strategy
      * @param distanceStrategy distance strategy to use
      */
-    ArrayList<Edge> link(ArrayList<Node> nodeList, int[] arg, DistanceStrategy distanceStrategy) ;//for kNN and egraph algorithms
+    ArrayList<Edge> link(ArrayList<Node> nodeList, int[] arg, DistanceStrategy distanceStrategy) throws Exception ;//for kNN and egraph algorithms
 
 }
