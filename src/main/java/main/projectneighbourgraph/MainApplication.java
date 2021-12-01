@@ -19,8 +19,7 @@ public class MainApplication extends Application {
         // get references to the controllers
         CanvasController canvasController = mainController.getCanvasController();
         canvasController.setMainController(mainController);
-        StatsTableController statsTableController = new StatsTableController();
-        statsTableController = mainController.getStatsTableController();
+        StatsTableController statsTableController = mainController.getStatsTableController();
 
 
         // initialize the graph and give the controllers the graphData
@@ -45,8 +44,8 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setMinHeight(400);
-        stage.setMinWidth(350);
+        stage.setMinHeight(600);
+        stage.setMinWidth(800);
     }
 
     public static void main(String[] args) {

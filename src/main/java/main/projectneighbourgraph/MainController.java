@@ -167,7 +167,6 @@ public class MainController {
      * @param actionEvent the event that triggered this method
      */
     public void refresh(ActionEvent actionEvent) {
-        statsTableController.reDraw();
         int[] arg = {2}; //TODO : change this with a correct argument system
         if (linkStrategy != null && distanceStrategy != null) {
             executeLinkStrategy(graphData.getNodeArrayList(), arg);
@@ -188,6 +187,7 @@ public class MainController {
         if(autoRefresh){
             refresh(null);
         }
+        statsTableController.reDraw();
     }
 
     /**
