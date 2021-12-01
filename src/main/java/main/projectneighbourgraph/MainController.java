@@ -57,7 +57,7 @@ public class MainController {
     @FXML
     private MenuItem euclideanSelection;
     @FXML
-    private MenuItem sineSelection;
+    private MenuItem cosineSelection;
 
     /**
      * Checkbox to enable or disable the automatic refresh of the graph
@@ -213,7 +213,7 @@ public class MainController {
      */
     public void cosineDistance(ActionEvent actionEvent) {
         setStrategy(new CosineStrategy());
-        setDistanceSelectionText("Sinus");
+        setDistanceSelectionText("Cosine");
     }
 
     /**
@@ -268,10 +268,10 @@ public class MainController {
      */
     public void setDistanceSelectionText(String distanceSelectionText) {
         euclideanSelection.setText("Euclidean");
-        sineSelection.setText("Sinus");
+        cosineSelection.setText("Cosine");
         switch (distanceSelectionText) {
             case "Euclidean" -> euclideanSelection.setText("Euclidean (selected)");
-            case "Sinus" -> sineSelection.setText("Sinus (selected)");
+            case "Cosine" -> cosineSelection.setText("Cosine (selected)");
         }
     }
 
@@ -322,7 +322,7 @@ public class MainController {
         alert.setContentText("The currently implemented strategies/algorithms are:\n" +
                 "Distance Strategies :\n" +
                 "  - Euclidean: the distance between two nodes is the euclidean distance\n" +
-                "  - Sinus: the distance between two nodes is the sinus of the angle between the two nodes\n" +
+                "  - Cosine: we use the cosine similarity of the nodes to differentiate their distance\n" +
                 "Link Strategies :\n" +
                 "  - kNN: we link each nodes to its k-nearest neighbors (for example its 2 closest for)\n" +
                 "  - e-graph: EXPLANATION NEEDED\n" +
