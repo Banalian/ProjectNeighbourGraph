@@ -28,7 +28,7 @@ public class CosineStrategy implements DistanceStrategy {
         double xDotX = aX*aX + aY*aY;
         double yDotY = bX*bX + bY*bY;
 
-        return xDotY/(Math.sqrt(xDotX)*Math.sqrt(yDotY));
+        return 1-(xDotY/(Math.sqrt(xDotX)*Math.sqrt(yDotY)));
 
     }
 
