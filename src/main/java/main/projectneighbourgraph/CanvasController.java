@@ -103,6 +103,10 @@ public class CanvasController {
         ArrayList<Node> nodes = graphData.getNodeArrayList();
         ArrayList<Edge> edges = graphData.getEdgeArrayList();
 
+        for(Edge edge : edges){
+            drawEdge(edge, gc);
+        }
+
         for(Node node : nodes){
 
             double xToDraw = reMapVar(node.getUnitxPos(), 0,1,frameMargin,canvas.getWidth()+frameMargin);
@@ -112,9 +116,7 @@ public class CanvasController {
             drawX(xToDraw, yToDraw, size, gc, node.getNodeColor());
         }
 
-        for(Edge edge : edges){
-            drawEdge(edge, gc);
-        }
+
 
     }
 
@@ -289,36 +291,54 @@ public class CanvasController {
      * @param gc the GraphicsContext to draw on
      */
     public void drawEdge(Edge edge, GraphicsContext gc){
-        drawLineBetweenTwoPoint(edge.getNode1(), edge.getNode2(), gc);
+        drawLineBetweenTwoPoint(edge.getNode1(), edge.getNode2(), gc, false);
     }
 
     /**
      * Draw a line between the two points, using their canvas position.
-     * Uses the color from the nodes to make a gradient line.
+     * if makeGradient is true, it will use a gradient between the two points
+     * else it will make a red line if the two nodes have different colors, or a black line if they have the same color
      * @param point1 the first node
      * @param point2 the second node
      * @param gc the GraphicsContext to draw on
+     * @param makeGradient true if you want to use a gradient, false otherwise
      */
-    public void drawLineBetweenTwoPoint(Node point1, Node point2, GraphicsContext gc){
+    public void drawLineBetweenTwoPoint(Node point1, Node point2, GraphicsContext gc, boolean makeGradient){
 
         Color point1Color;
         Color point2Color;
-        // to make sure that the gradient is in the correct direction
-        if(point1.getUnitxPos() <= point2.getUnitxPos()){
-            point1Color = point1.getNodeColor();
-            point2Color = point2.getNodeColor();
+        Color colorToUse;
+
+        if(makeGradient){
+            // we want to make a gradient line using the color of the nodes
+
+            // to make sure that the gradient is in the correct direction
+            if(point1.getUnitxPos() <= point2.getUnitxPos()){
+                point1Color = point1.getNodeColor();
+                point2Color = point2.getNodeColor();
+            }else{
+                point1Color = point2.getNodeColor();
+                point2Color = point1.getNodeColor();
+            }
+
+            if(point1Color == null) point1Color = Color.BLACK;
+            if(point2Color == null) point2Color = Color.BLACK;
+
+            Stop[] stops = new Stop[] { new Stop(0, point1Color), new Stop(1, point2Color)};
+            LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+
+            gc.setStroke(lg1);
         }else{
-            point1Color = point2.getNodeColor();
-            point2Color = point1.getNodeColor();
+            //we don't want to use a gradient, so we just do a red line if the 2 nodes are different colors, or a black line if they are the same color
+            if(point1.getNodeColor() != point2.getNodeColor()){
+                colorToUse = Color.RED;
+            }else{
+                colorToUse = Color.BLACK;
+            }
+
+            gc.setStroke(colorToUse);
         }
 
-        if(point1Color == null) point1Color = Color.BLACK;
-        if(point2Color == null) point2Color = Color.BLACK;
-
-        Stop[] stops = new Stop[] { new Stop(0, point1Color), new Stop(1, point2Color)};
-        LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
-
-        gc.setStroke(lg1);
 
         gc.strokeLine(
                 point1.getxPos(),
