@@ -26,11 +26,11 @@ public class kNNLinkStrategy implements LinkStrategy {
         {
             //check if there is one and only one argument
             if (arg.length != 1) {
-                throw new IllegalArgumentException("kNNLinkStrategy only takes one argument");
+                throw new IllegalArgumentException("kNNLinkStrategy only use one argument, too many or no arguments given");
             }
             //check if the argument is valid
             if (arg[0] < 1)
-                throw new IllegalArgumentException("Error : argument is too low, must be at least one");
+                throw new IllegalArgumentException("Error : k argument is too low, must be at least one");
             if (arg[0] > nodeList.size()) {
                 //commented because it's not a problem, better to just warn the user
                 //throw new IllegalArgumentException("Error : argument is too high, must be less than the numbers of nodes");
