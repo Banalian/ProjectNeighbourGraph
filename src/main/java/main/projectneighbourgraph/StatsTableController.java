@@ -55,7 +55,7 @@ public class StatsTableController {
         xCoordColumn.setCellValueFactory(new PropertyValueFactory<Node, Double>("unitxPos"));
         yCoordColumn.setCellValueFactory(new PropertyValueFactory<Node, Double>("unityPos"));
         //linkedToColumn.setCellValueFactory(new PropertyValueFactory<Node, String>("id"));
-        tableView.getItems().add(new Node(250,250,0.5,0.5,0));
+        //tableView.getItems().add(new Node(250,250,0.5,0.5,0));
     }
 
     public void setGraphData(Graph graphData) {
