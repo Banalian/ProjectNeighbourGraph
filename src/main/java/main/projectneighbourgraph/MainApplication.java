@@ -19,7 +19,8 @@ public class MainApplication extends Application {
         // get references to the controllers
         CanvasController canvasController = mainController.getCanvasController();
         canvasController.setMainController(mainController);
-        StatsTableController statsTableController = mainController.getStatsTableController();
+        StatsTableController statsTableController = new StatsTableController();
+        statsTableController = mainController.getStatsTableController();
 
 
         // initialize the graph and give the controllers the graphData
@@ -30,11 +31,11 @@ public class MainApplication extends Application {
 
         /// adds 2 listeners to do the resize action if necessary, since canvas don't have any resize properties by default.
         stage.widthProperty().addListener((ov, oldValue, newValue) -> {
-            canvasController.setCanvasWidth(newValue.doubleValue()*0.70);
+            canvasController.setCanvasWidth(newValue.doubleValue()*0.85);
             canvasController.reDraw();
         });
         stage.heightProperty().addListener((ov, oldValue, newValue) -> {
-            canvasController.setCanvasHeight(newValue.doubleValue()*0.70);
+            canvasController.setCanvasHeight(newValue.doubleValue()*0.72);
             canvasController.reDraw();
         });
 
@@ -44,8 +45,8 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setMinHeight(600);
-        stage.setMinWidth(800);
+        stage.setMinHeight(642);
+        stage.setMinWidth(841);
     }
 
     public static void main(String[] args) {
