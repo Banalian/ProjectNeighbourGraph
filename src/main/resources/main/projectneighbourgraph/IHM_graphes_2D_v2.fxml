@@ -35,6 +35,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.projectneighbourgraph.MainController">
     <children>
@@ -63,7 +64,7 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <SplitPane dividerPositions="0.875" prefHeight="549.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <SplitPane dividerPositions="0.8724179829890644" prefHeight="549.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <items>
                                                 <SplitPane dividerPositions="0.865" orientation="VERTICAL" prefHeight="547.0" prefWidth="714.0">
                                                     <items>
@@ -117,6 +118,16 @@
                                                         <Label alignment="CENTER" layoutX="13.0" layoutY="184.0" prefHeight="17.0" prefWidth="75.0" text="Brush Radius :" textAlignment="CENTER">
 
                                                         </Label>
+                                          <Label fx:id="totalNodeNbLabel" layoutX="-1.0" layoutY="272.0" prefHeight="39.0" prefWidth="104.0" text="Number of nodes : ">
+                                             <font>
+                                                <Font size="9.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="totalEdgeNbLabel" layoutX="-1.0" layoutY="311.0" prefHeight="39.0" prefWidth="104.0" text="Number of edges : ">
+                                             <font>
+                                                <Font size="9.0" />
+                                             </font>
+                                          </Label>
                                                     </children></AnchorPane>
                                             </items>
                                         </SplitPane>

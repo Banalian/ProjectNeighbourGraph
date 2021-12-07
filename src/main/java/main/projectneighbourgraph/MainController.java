@@ -71,6 +71,13 @@ public class MainController {
     boolean autoRefresh = false;
 
 
+    @FXML
+    private Label totalNodeNbLabel;
+
+    @FXML
+    private Label totalEdgeNbLabel;
+
+
     /**
      * reference to the graph and its data (nodes and edges)
      */
@@ -179,6 +186,9 @@ public class MainController {
         if (distanceStrategy == null) {
             System.out.println("distanceStrategy is missing, can't refresh");
         }
+        statsTableController.reDraw();
+        totalNodeNbLabel.setText("Number of nodes : " + graphData.getNodeArrayList().size());
+        totalEdgeNbLabel.setText("Number of nodes : " + graphData.getEdgeArrayList().size());
     }
 
     /**
@@ -188,8 +198,12 @@ public class MainController {
         ArrayList<Edge> edges = graphData.getEdgeArrayList();
         if(autoRefresh){
             refresh(null);
+        }else{
+            statsTableController.reDraw();
+            totalNodeNbLabel.setText("Number of nodes : " + graphData.getNodeArrayList().size());
+            totalEdgeNbLabel.setText("Number of nodes : " + graphData.getEdgeArrayList().size());
         }
-        statsTableController.reDraw();
+
     }
 
     /**
