@@ -5,6 +5,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
+import main.projectneighbourgraph.graphdata.Edge;
 import main.projectneighbourgraph.graphdata.Graph;
 import main.projectneighbourgraph.graphdata.Node;
 
@@ -18,7 +19,7 @@ public class StatsTableController {
     @FXML private TableColumn<Node, String> pointNameColumn;
     @FXML private TableColumn<Node, Double> xCoordColumn;
     @FXML private TableColumn<Node, Double> yCoordColumn;
-    @FXML private TableColumn<Node, String> linkedToColumn;
+    @FXML private TableColumn<Node, Integer> linkedToColumn;
     @FXML private TableColumn<Node, Color> PointColor;
     private MainController MC;
     int test;
@@ -43,12 +44,13 @@ public class StatsTableController {
     }
 
     public void reDraw(){
-        int pointname = 1;
+        int pointname = 0;
 
         ArrayList<Node> nodes = graphData.getNodeArrayList();
+        ArrayList<Edge> edges = graphData.getEdgeArrayList();
         tableView.getItems().clear();
         for (Node node : nodes) {
-            tableView.getItems().add(new Node(250, 250, node.getUnitxPos(), node.getUnityPos(),pointname++,node.getNodeColor()));
+            tableView.getItems().add(new Node(250, 250, node.getUnitxPos(), node.getUnityPos(),pointname++,node.getConnexions(),node.getNodeColor()));
         }
 
     }
@@ -57,7 +59,7 @@ public class StatsTableController {
         pointNameColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         xCoordColumn.setCellValueFactory(new PropertyValueFactory<>("unitxPos"));
         yCoordColumn.setCellValueFactory(new PropertyValueFactory<>("unityPos"));
-        linkedToColumn.setCellValueFactory(new PropertyValueFactory<>("idN"));
+        linkedToColumn.setCellValueFactory(new PropertyValueFactory<>("Connexions"));
         PointColor.setCellValueFactory((new PropertyValueFactory<>("nodeColor")));
         //tableView.getItems().add(new Node(250,250,0.5,0.5,0));
     }

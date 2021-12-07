@@ -147,8 +147,22 @@ public class Graph {
         edgeArrayList.remove(edgeToRemove);
     }
 
+    /**
+     * add connexions for an edge
+     */
+    public void addConnexions(){
+        for(Node node : nodeArrayList) {
+            node.clearConnexions();
+        }
+        for (Edge edge : edgeArrayList){
+            edge.getNode1().addConnexions(edge.getNode2());
+            edge.getNode2().addConnexions(edge.getNode1());
+        }
+    }
+
     public void setEdgeArrayList(ArrayList<Edge> result) {
         this.edgeArrayList = result;
+        addConnexions();
     }
 
     public void clearAll() {

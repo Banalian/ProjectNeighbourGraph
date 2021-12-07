@@ -1,7 +1,10 @@
 package main.projectneighbourgraph.graphdata;
 
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.TableColumn;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 
 /**
  * Data class for a node, containing its canvas position and relative position for our range
@@ -34,6 +37,10 @@ public class Node {
      */
     private Color nodeColor;
 
+    /**
+     The node's connexions
+     */
+    private ArrayList<Integer> Connexions;
 
     /**
      * Normal Constructor, no color needed
@@ -50,6 +57,7 @@ public class Node {
         this.unityPos = unityPos;
         this.id = id;
         this.nodeColor = null;
+        this.Connexions = new ArrayList<Integer>();
     }
 
     /**
@@ -67,6 +75,27 @@ public class Node {
         this.unitxPos = unitxPos;
         this.unityPos = unityPos;
         this.id = id;
+        this.nodeColor = nodeColor;
+        this.Connexions = new ArrayList<Integer>();
+    }
+
+    /**
+     * Constructor with Connexions ArrayList
+     * @param xPos the x position of the node
+     * @param yPos the y position of the node
+     * @param unitxPos the relative x position of the node (between 0 and 1)
+     * @param unityPos the relative y position of the node (between 0 and 1)
+     * @param id the node's id
+     * @param Connexions the connexion's list
+     * @param nodeColor the node's color
+     */
+    public Node(double xPos, double yPos, double unitxPos, double unityPos, int id, ArrayList<Integer> Connexions, Color nodeColor) {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.unitxPos = unitxPos;
+        this.unityPos = unityPos;
+        this.id = id;
+        this.Connexions = Connexions;
         this.nodeColor = nodeColor;
     }
 
@@ -95,6 +124,10 @@ public class Node {
         return unityPos;
     }
 
+    public ArrayList<Integer> getConnexions() {
+        return Connexions;
+    }
+
     public void setUnitxPos(double unitxPos) {
         this.unitxPos = unitxPos;
     }
@@ -110,6 +143,7 @@ public class Node {
     public void setNodeColor(Color nodeColor) {
         this.nodeColor = nodeColor;
     }
+
 
     public int getId() {
         return id;
@@ -129,6 +163,7 @@ public class Node {
                 ", unityPos=" + unityPos +
                 ", color=" + nodeColor +
                 ", id=" + id +
+                ", Connexions" + Connexions +
                 '}';
     }
 
@@ -149,6 +184,21 @@ public class Node {
         if (Double.compare(node.unitxPos, unitxPos) != 0) return false;
         if (Double.compare(node.unityPos, unityPos) != 0) return false;
         return id == node.id;
+    }
+
+    /**
+     *  add connexions
+     * @param node the object to check
+     */
+    public void addConnexions(Node node){
+        Connexions.add(node.getId());
+    }
+
+    /**
+     *  clear connexions
+     */
+    public void clearConnexions(){
+        Connexions.clear();
     }
 
 }

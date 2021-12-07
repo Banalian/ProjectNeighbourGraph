@@ -113,6 +113,7 @@ public class MainController {
                 ArrayList<Edge> result = linkStrategy.link(nodeArrayList, arg, distanceStrategy);
                 graphData.setEdgeArrayList(result);
                 canvasController.reDraw();
+                statsTableController.reDraw();
             }catch (Exception e){
                 //show an alert box with the error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -184,6 +185,7 @@ public class MainController {
      * refresh the canvas if the auto refresh is checked
      */
     public void autoRefresh(){
+        ArrayList<Edge> edges = graphData.getEdgeArrayList();
         if(autoRefresh){
             refresh(null);
         }
