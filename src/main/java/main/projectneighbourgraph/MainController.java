@@ -319,11 +319,13 @@ public class MainController {
         alert.setHeaderText("About");
         alert.setContentText("This is a simple application that allows you to create a graph by adding nodes on a canvas " +
                 "and then draw the graph using different strategies to link the nodes between them.\n" +
-                "Made by: \n" +
+                "\nMade by: \n" +
                 "  - Lilian Pouvreau\n" +
                 "  - Corentin Esnault\n" +
                 "  - Robin Lejeune\n" +
-                "  - Mouna Kanouni\n");
+                "  - Mouna Kanouni\n" +
+                "\nUnder the supervision of: \n" +
+                "  - Gilles Venturini\n");
         alert.showAndWait();
     }
 
@@ -336,13 +338,14 @@ public class MainController {
         alert.setTitle("Algorithm explanation");
         alert.setHeaderText("Algorithm explanation");
         alert.setContentText("The currently implemented strategies/algorithms are:\n" +
-                "Distance Strategies :\n" +
-                "  - Euclidean: the distance between two nodes is the euclidean distance\n" +
+                "\nDistance Strategies :\n" +
+                "  - Manhattan (L1-Norm) : the distance between two nodes is the sum of the absolute values of the differences between their attributes\n" +
+                "  - Euclidean (L2-Norm): the distance between two nodes is the euclidean distance\n" +
                 "  - Cosine: we use the cosine similarity of the nodes to differentiate their distance\n" +
-                "Link Strategies :\n" +
+                "\nLink Strategies :\n" +
                 "  - kNN: we link each nodes to its k-nearest neighbors (for example its 2 closest for)\n" +
                 "  - e-graph: EXPLANATION NEEDED\n" +
-                "  - GG Gabriel: for each node, you check all the other node and create a cicle between them, and if no nodes are within that circle, we link the nodes.\n" +
+                "  - GG Gabriel: for each node, you check all the other node and create a circle between them, and if no nodes are within that circle, we link the nodes.\n" +
                 "  - Relative neighbors: First, for each pair of nodes i and j, we calculate the distance between them d(i, j). Secondly for each other points k != i, j; we take the max distance Dk(i, j) between (i, k) or (j, k). And to finish, we link i and j if there is 0 Dk(i, j) smaller than d(i, j)\n");
 
         alert.showAndWait();
