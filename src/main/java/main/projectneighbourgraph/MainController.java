@@ -58,6 +58,8 @@ public class MainController {
     private MenuItem euclideanSelection;
     @FXML
     private MenuItem cosineSelection;
+    @FXML
+    private MenuItem manhattanSelection;
 
     /**
      * Checkbox to enable or disable the automatic refresh of the graph
@@ -188,7 +190,7 @@ public class MainController {
         }
         statsTableController.reDraw();
         totalNodeNbLabel.setText("Number of nodes : " + graphData.getNodeArrayList().size());
-        totalEdgeNbLabel.setText("Number of nodes : " + graphData.getEdgeArrayList().size());
+        totalEdgeNbLabel.setText("Number of edges : " + graphData.getEdgeArrayList().size());
     }
 
     /**
@@ -231,6 +233,12 @@ public class MainController {
         setStrategy(new CosineStrategy());
         setDistanceSelectionText("Cosine");
     }
+
+    public void manhattanDistance(ActionEvent actionEvent) {
+        setStrategy(new ManhattanStrategy());
+        setDistanceSelectionText("Manhattan");
+    }
+
 
     /**
      * Action to set the new link strategy to the kNN strategy
@@ -285,9 +293,12 @@ public class MainController {
     public void setDistanceSelectionText(String distanceSelectionText) {
         euclideanSelection.setText("Euclidean");
         cosineSelection.setText("Cosine");
+        manhattanSelection.setText("Manhattan");
         switch (distanceSelectionText) {
             case "Euclidean" -> euclideanSelection.setText("Euclidean (selected)");
             case "Cosine" -> cosineSelection.setText("Cosine (selected)");
+            case "Manhattan" -> manhattanSelection.setText("Manhattan (selected)");
+
         }
     }
 

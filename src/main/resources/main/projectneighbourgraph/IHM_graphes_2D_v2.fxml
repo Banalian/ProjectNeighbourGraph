@@ -84,6 +84,7 @@
                                                                             <items>
                                                                                 <MenuItem fx:id="euclideanSelection" mnemonicParsing="false" onAction="#euclideanDistance" text="Euclidean" />
                                                                                 <MenuItem fx:id="cosineSelection" mnemonicParsing="false" onAction="#cosineDistance" text="Cosine" />
+                                                                                <MenuItem fx:id="manhattanSelection" mnemonicParsing="false" onAction="#manhattanDistance" text="Manhattan" />
                                                                             </items>
                                                                         </MenuButton>
                                                                         <MenuButton contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" popupSide="TOP" prefHeight="25.0" prefWidth="90.0" text="Algorithm" textAlignment="CENTER">
