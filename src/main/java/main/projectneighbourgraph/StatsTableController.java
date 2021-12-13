@@ -35,9 +35,7 @@ public class StatsTableController {
         PointColor = new TableColumn<>();
         test=0;
 
-
     }
-
 
     public void SetMainController(MainController MC){
         this.MC = MC;

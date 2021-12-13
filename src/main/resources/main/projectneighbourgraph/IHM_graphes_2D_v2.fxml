@@ -107,24 +107,26 @@
                                                     <children>
                                                         <Button fx:id="ButtonClick" layoutX="20.0" layoutY="32.0" mnemonicParsing="false" onAction="#onActionButtonClick" prefHeight="25.0" prefWidth="60.0" text="Click" />
                                                         <Button fx:id="ButtonBrush" layoutX="20.0" layoutY="91.0" mnemonicParsing="false" onAction="#onActionButtonBrush" prefHeight="25.0" prefWidth="60.0" text="Brush" />
-                                                        <TextField fx:id="pointsPerClick" layoutX="14.0" layoutY="151.0" onAction="#getPointsPerClick" prefHeight="25.0" prefWidth="73.0">
+                                                        <TextField fx:id="pointsPerClick" layoutX="14.0" layoutY="151.0" onAction="#getPointsPerClick" prefHeight="25.0" prefWidth="73.0" promptText="1-10">
                                                             <cursor>
                                                                 <Cursor fx:constant="DEFAULT" />
                                                             </cursor>
                                                         </TextField>
-                                                        <TextField fx:id="radiusBrush" layoutX="14.0" layoutY="201.0" onAction="#getRadiusBrush" prefHeight="25.0" prefWidth="73.0" />
+                                                        <TextField fx:id="radiusBrush" layoutX="14.0" layoutY="201.0" onAction="#getRadiusBrush" prefHeight="25.0" prefWidth="73.0" promptText="100-500" />
+                                          <TextField fx:id="linkParameter" layoutX="14.0" layoutY="250.0" onAction="#getLinkParameter" prefHeight="25.0" prefWidth="73.0" promptText="a,b,c,d..." />
                                                         <Label alignment="CENTER" layoutY="134.0" prefHeight="17.0" prefWidth="102.0" text="Number of Points :" textAlignment="CENTER">
 
                                                         </Label>
                                                         <Label alignment="CENTER" layoutX="13.0" layoutY="184.0" prefHeight="17.0" prefWidth="75.0" text="Brush Radius :" textAlignment="CENTER">
 
                                                         </Label>
-                                          <Label fx:id="totalNodeNbLabel" layoutX="-1.0" layoutY="272.0" prefHeight="39.0" prefWidth="104.0" text="Number of nodes : ">
+                                          <Label alignment="CENTER" layoutX="-1.0" layoutY="233.0" prefHeight="17.0" prefWidth="102.0" text="Parameter :" textAlignment="CENTER" />
+                                          <Label fx:id="totalNodeNbLabel" layoutX="-1.0" layoutY="272.0" prefHeight="39.0" prefWidth="104.0" text="Number of nodes : " AnchorPane.bottomAnchor="40.0">
                                              <font>
                                                 <Font size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="totalEdgeNbLabel" layoutX="-1.0" layoutY="311.0" prefHeight="39.0" prefWidth="104.0" text="Number of edges : ">
+                                          <Label fx:id="totalEdgeNbLabel" layoutX="-1.0" layoutY="311.0" prefHeight="39.0" prefWidth="104.0" text="Number of edges : " AnchorPane.bottomAnchor="0.0">
                                              <font>
                                                 <Font size="9.0" />
                                              </font>

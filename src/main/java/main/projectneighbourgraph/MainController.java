@@ -30,6 +30,8 @@ public class MainController {
     private TextField radiusBrush;
     @FXML
     private TextField pointsPerClick;
+    @FXML
+    private TextField linkParameter;
 
     /**
      * ColorPicker to choose a color for the nodes
@@ -370,5 +372,20 @@ public class MainController {
         Platform.exit();
     }
 
+    public int[] getLinkParameter() {
+        String arr = linkParameter.getText();
+        String[] items = arr.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
 
+        int[] results = new int[items.length];
+
+        for (int i = 0; i < items.length; i++) {
+            try {
+                results[i] = Integer.parseInt(items[i]);
+            } catch (NumberFormatException nfe) {
+                //NOTE: write something here if you need to recover from formatting errors
+            };
+        }
+        return results;
+
+    }
 }
