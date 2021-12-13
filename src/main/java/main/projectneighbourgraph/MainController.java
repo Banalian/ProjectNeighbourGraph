@@ -179,9 +179,19 @@ public class MainController {
      * @param actionEvent the event that triggered this method
      */
     public void refresh(ActionEvent actionEvent) {
-        int[] arg = {2}; //TODO : change this with a correct argument system
-        if (linkStrategy != null && distanceStrategy != null) {
-            executeLinkStrategy(graphData.getNodeArrayList(), arg);
+        int[] arg = getLinkParameter();
+
+        if (linkStrategy != null && distanceStrategy != null && arg != null) {
+            try {
+                executeLinkStrategy(graphData.getNodeArrayList(), arg);
+            }catch (Exception e){
+                //show an alert box with the error message
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error : " + e.getMessage());
+                alert.showAndWait();
+            }
+
         }
 
         if (linkStrategy == null) {
@@ -205,7 +215,7 @@ public class MainController {
         }else{
             statsTableController.reDraw();
             totalNodeNbLabel.setText("Number of nodes : " + graphData.getNodeArrayList().size());
-            totalEdgeNbLabel.setText("Number of nodes : " + graphData.getEdgeArrayList().size());
+            totalEdgeNbLabel.setText("Number of edges : " + graphData.getEdgeArrayList().size());
         }
 
     }
@@ -383,7 +393,7 @@ public class MainController {
                 results[i] = Integer.parseInt(items[i]);
             } catch (NumberFormatException nfe) {
                 //NOTE: write something here if you need to recover from formatting errors
-            };
+            }
         }
         return results;
 
