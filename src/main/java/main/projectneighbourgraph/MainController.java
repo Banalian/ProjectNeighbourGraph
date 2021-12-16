@@ -392,7 +392,12 @@ public class MainController {
             try {
                 results[i] = Integer.parseInt(items[i]);
             } catch (NumberFormatException nfe) {
-                //NOTE: write something here if you need to recover from formatting errors
+                //make an alert box
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("The parameter(s) you entered are not valid. Please enter valid parameters. (using the correct format)");
+                alert.showAndWait();
             }
         }
         return results;
