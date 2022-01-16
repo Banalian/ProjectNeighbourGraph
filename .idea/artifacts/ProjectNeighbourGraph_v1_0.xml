@@ -1,12 +1,13 @@
 <component name="ArtifactManager">
-  <artifact name="ProjectNeighbourGraph:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/ProjectNeighbourGraph_jar</output-path>
+  <artifact name="ProjectNeighbourGraph_v1.0">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjectNeighbourGraph_v1_0</output-path>
     <root id="root">
       <element id="archive" name="ProjectNeighbourGraph.jar">
+        <element id="module-output" name="ProjectNeighbourGraph" />
         <element id="directory" name="META-INF">
           <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+          <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
         </element>
-        <element id="module-output" name="ProjectNeighbourGraph" />
       </element>
       <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:17-ea+11" />
       <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:17-ea+11" />

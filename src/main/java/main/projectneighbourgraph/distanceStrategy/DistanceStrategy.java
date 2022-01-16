@@ -5,6 +5,9 @@ import main.projectneighbourgraph.graphdata.Node;
 
 import java.util.ArrayList;
 
+/**
+ * Interface for the distance strategy. Allow to create a new way to calculate the distance between two nodes.
+ */
 public interface DistanceStrategy {
 
     double distBetweenTwoNodes(Node a, Node b);

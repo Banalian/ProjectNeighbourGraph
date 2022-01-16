@@ -267,12 +267,12 @@ public class MainController {
     }
 
     /**
-     * Action to set the new link strategy to the gg gabriel strategy
+     * Action to set the new link strategy to the Gabriel Graph strategy
      * @param actionEvent the event that triggered this method
      */
     public void ggLink(ActionEvent actionEvent) {
         setStrategy(new ggLinkStrategy());
-        setLinkSelectionText("GG Gabriel");
+        setLinkSelectionText("Gabriel Graph");
     }
 
     public void relativeLink(ActionEvent actionEvent) {
@@ -287,13 +287,13 @@ public class MainController {
     public void setLinkSelectionText(String linkSelectionText) {
         kNNSelection.setText("kNN");
         egraphSelection.setText("ε-graph");
-        ggSelection.setText("GG Gabriel");
+        ggSelection.setText("Gabriel Graph");
         relativeSelection.setText("Relative neighbors");
 
         switch (linkSelectionText) {
             case "kNN" -> kNNSelection.setText("kNN (selected)");
             case "e-graph" -> egraphSelection.setText("ε-graph (selected)");
-            case "GG Gabriel" -> ggSelection.setText("GG Gabriel (selected)");
+            case "Gabriel Graph" -> ggSelection.setText("Gabriel Graph (selected)");
             case "Relative neighbors" -> relativeSelection.setText("Relative neighbors (selected)");
         }
     }
@@ -368,7 +368,7 @@ public class MainController {
                 "\nLink Strategies :\n" +
                 "  - kNN: we link each nodes to its k-nearest neighbors (for example its 2 closest for)\n" +
                 "  - e-graph: for each node, check if the distance with other nodes is less or equal than epsilon value,and add edge\n" +
-                "  - GG Gabriel: for each node, you check all the other node and create a circle between them, and if no nodes are within that circle, we link the nodes.\n" +
+                "  - Gabriel Graph: for each node, you check all the other node and create a circle between them, and if no nodes are within that circle, we link the nodes.\n" +
                 "  - Relative neighbors: First, for each pair of nodes i and j, we calculate the distance between them d(i, j). Secondly for each other points k != i, j; we take the max distance Dk(i, j) between (i, k) or (j, k). And to finish, we link i and j if there is 0 Dk(i, j) smaller than d(i, j)\n");
 
         alert.showAndWait();

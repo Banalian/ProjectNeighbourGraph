@@ -30,6 +30,7 @@ public class Graph {
         nodeArrayList = new ArrayList<>();
         edgeArrayList = new ArrayList<>();
         graphId = nextGraphId++;
+        colorToUse = Color.BLACK;
     }
 
 
