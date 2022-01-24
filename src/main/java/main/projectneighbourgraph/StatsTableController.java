@@ -27,7 +27,7 @@ public class StatsTableController {
     private Graph graphData;
 
     public StatsTableController(){
-        tableView = new TableView<Node>() ;
+        tableView = new TableView<>() ;
         pointNameColumn = new TableColumn<>();
         xCoordColumn = new TableColumn<>();
         yCoordColumn = new TableColumn<>();
@@ -42,13 +42,12 @@ public class StatsTableController {
     }
 
     public void reDraw(){
-        int pointname = 0;
 
         ArrayList<Node> nodes = graphData.getNodeArrayList();
         ArrayList<Edge> edges = graphData.getEdgeArrayList();
         tableView.getItems().clear();
         for (Node node : nodes) {
-            tableView.getItems().add(new Node(250, 250, node.getUnitxPos(), node.getUnityPos(),pointname++,node.getConnexions(),node.getNodeColor()));
+            tableView.getItems().add(node);
         }
 
     }
