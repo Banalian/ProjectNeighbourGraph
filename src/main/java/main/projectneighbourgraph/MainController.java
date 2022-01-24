@@ -102,6 +102,13 @@ public class MainController {
     }
 
 
+    //initialize the controller
+    @FXML
+    private void initialize() {
+        euclideanDistance(null);
+        kNNLink(null);
+    }
+
     /**
      * set the strategy for the link creation
      * @param linkStrategy the new strategy to use
@@ -116,7 +123,7 @@ public class MainController {
      * @param nodeArrayList the arraylist of nodes
      * @param arg the arguments used by the strategy (like for example the number of neighbours for kNN)
      */
-    void executeLinkStrategy(ArrayList<Node> nodeArrayList, int[] arg) {
+    void executeLinkStrategy(ArrayList<Node> nodeArrayList, double[] arg) {
         if (distanceStrategy == null) {
             System.out.println("No distance strategy selected, please select one");
         } else {
@@ -179,7 +186,7 @@ public class MainController {
      * @param actionEvent the event that triggered this method
      */
     public void refresh(ActionEvent actionEvent) {
-        int[] arg = getLinkParameter();
+        double[] arg = getLinkParameter();
 
         if (linkStrategy != null && distanceStrategy != null && arg != null) {
             try {
@@ -246,6 +253,10 @@ public class MainController {
         setDistanceSelectionText("Cosine");
     }
 
+    /**
+     * Action to set the new distance strategy to the manhattan strategy
+     * @param actionEvent the event that triggered this method
+     */
     public void manhattanDistance(ActionEvent actionEvent) {
         setStrategy(new ManhattanStrategy());
         setDistanceSelectionText("Manhattan");
@@ -382,15 +393,18 @@ public class MainController {
         Platform.exit();
     }
 
-    public int[] getLinkParameter() {
+    public double[] getLinkParameter() {
         String arr = linkParameter.getText();
+        if (arr.equals("")) {
+            return new double[]{-1};
+        }
         String[] items = arr.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
 
-        int[] results = new int[items.length];
+        double[] results = new double[items.length];
 
         for (int i = 0; i < items.length; i++) {
             try {
-                results[i] = Integer.parseInt(items[i]);
+                results[i] = Double.parseDouble(items[i]);
             } catch (NumberFormatException nfe) {
                 //make an alert box
                 Alert alert = new Alert(Alert.AlertType.ERROR);
