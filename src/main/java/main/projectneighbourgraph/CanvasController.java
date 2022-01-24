@@ -126,13 +126,16 @@ public class CanvasController {
             canvas.setOnMouseDragged(null);
         }
         if (numberMode == 2){
-            MC.getRadiusBrush(null);
-            MC.getPointsPerClick(null);
-
             canvas.setOnMouseClicked(this::addNewBrush);
             canvas.setOnMouseDragged(this::addNewBrushDragged);
         }
     }
+
+    public void getLatestBrushParameters(){
+        MC.getRadiusBrush(null);
+        MC.getPointsPerClick(null);
+    }
+
     /**
      * Adds a new point a the given MouseEvent location
      * will check if the position is valid, before adding the data and drawing the point
@@ -175,6 +178,7 @@ public class CanvasController {
     public void addNewBrush(MouseEvent event){
         //System.out.println("you pressed !");
         Random r = new Random();
+        getLatestBrushParameters();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         double xClicked = event.getX();
@@ -211,6 +215,7 @@ public class CanvasController {
     public void addNewBrushDragged(MouseEvent event){
         //System.out.println("you pressed !");
         Random r = new Random();
+        getLatestBrushParameters();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         double xClicked = event.getX();
