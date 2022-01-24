@@ -126,6 +126,9 @@ public class CanvasController {
             canvas.setOnMouseDragged(null);
         }
         if (numberMode == 2){
+            MC.getRadiusBrush(null);
+            MC.getPointsPerClick(null);
+
             canvas.setOnMouseClicked(this::addNewBrush);
             canvas.setOnMouseDragged(this::addNewBrushDragged);
         }
