@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class ggLinkStrategy implements LinkStrategy {
 
-    public ArrayList<Edge> link(ArrayList<Node> nodeList, int[] arg, DistanceStrategy distanceStrategy) {
+    public ArrayList<Edge> link(ArrayList<Node> nodeList, double[] arg, DistanceStrategy distanceStrategy) {
         ArrayList<Edge> toLink = new ArrayList<>(); //List of edges to create
 
         //Take 2 nodes from the nodes list and create their circumscribed circle
         for (int i = 0; i < nodeList.size(); i++) {
-            for (int j = 0; j < nodeList.size(); j++) {
+            for (int j =i+1; j < nodeList.size(); j++) {
                 if (i != j){
                     Node node1 = nodeList.get(i);
                     Node node2 = nodeList.get(j);
@@ -35,7 +35,8 @@ public class ggLinkStrategy implements LinkStrategy {
                     }
                     //If there isn't any, link the nodes
                     if (!nodeFound){
-                        toLink.add(new Edge(node1, node2));}
+                        toLink.add(new Edge(node1, node2));
+                    }
 
                 }
             }

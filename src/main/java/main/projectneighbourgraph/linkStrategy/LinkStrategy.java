@@ -16,7 +16,8 @@ public interface LinkStrategy {
      * @param nodeList list of nodes to link
      * @param arg Array of arguments to use in the link strategy
      * @param distanceStrategy distance strategy to use
+     * @return list of edges created
      */
-    ArrayList<Edge> link(ArrayList<Node> nodeList, int[] arg, DistanceStrategy distanceStrategy) throws Exception ;
+    ArrayList<Edge> link(ArrayList<Node> nodeList, double[] arg, DistanceStrategy distanceStrategy) throws Exception ;
 
 }

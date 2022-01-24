@@ -19,13 +19,13 @@ public class relativeLinkStrategy implements LinkStrategy {
      * @param arg Array of argument, here it is useless
      * @param distanceStrategy the distance strategy to use
      */
-    public ArrayList<Edge> link(ArrayList<Node> nodeList, int[] arg, DistanceStrategy distanceStrategy) {
+    public ArrayList<Edge> link(ArrayList<Node> nodeList, double[] arg, DistanceStrategy distanceStrategy) {
         ArrayList<Edge> RNG = new ArrayList<>();
         //Initialisation:
         //Distance between i and j ---> d(i, j)
-        double d[][] = new double[nodeList.size()][nodeList.size()];
+        double[][] d = new double[nodeList.size()][nodeList.size()];
         //Max Distance between d(i, k) and d(j, k) ---> d(i, j, k)
-        double dkmax[][][] = new double[nodeList.size()][nodeList.size()][nodeList.size()];
+        double[][][] dkmax = new double[nodeList.size()][nodeList.size()][nodeList.size()];
         ////////////////////////////////////////////////////////
         //Step 1: Calculate distance between each pair of points
         for (int i = 0; i < nodeList.size(); i++){

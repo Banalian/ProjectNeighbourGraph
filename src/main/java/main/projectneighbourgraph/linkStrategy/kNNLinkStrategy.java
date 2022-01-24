@@ -21,8 +21,9 @@ public class kNNLinkStrategy implements LinkStrategy {
      * @param nodeList the list of nodes to link
      * @param arg Array of argument, here only containing the number of nearest neighbours to choose
      * @param distanceStrategy the distance strategy to use
+     * @return the list of edges corresponding to the k nearest neighbours
      */
-    public ArrayList<Edge> link(ArrayList<Node> nodeList, int[] arg, DistanceStrategy distanceStrategy) {
+    public ArrayList<Edge> link(ArrayList<Node> nodeList, double[] arg, DistanceStrategy distanceStrategy) {
         {
             //check if there is one and only one argument
             if (arg.length != 1) {
@@ -30,7 +31,7 @@ public class kNNLinkStrategy implements LinkStrategy {
             }
             //check if the argument is valid
             if (arg[0] < 1)
-                throw new IllegalArgumentException("Error : k argument is too low, must be at least one");
+                throw new IllegalArgumentException("Error : k argument is too low or not set up, must be at least one");
             if (arg[0] > nodeList.size()) {
                 //commented because it's not a problem, better to just warn the user
                 //throw new IllegalArgumentException("Error : argument is too high, must be less than the numbers of nodes");
